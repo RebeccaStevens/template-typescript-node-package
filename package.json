@@ -103,5 +103,5 @@
     "ts-node": "10.9.1",
     "typescript": "5.0.2"
   },
-  "packageManager": "pnpm@7.29.1"
+  "packageManager": "pnpm@7.30.0"
 }
