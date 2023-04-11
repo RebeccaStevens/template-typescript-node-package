@@ -50,7 +50,7 @@ specifiers:
   semantic-release: 21.0.1
   ts-node: 10.9.1
   ts-paths-esm-loader: 1.4.1
-  tsconfig-paths: 4.1.2
+  tsconfig-paths: 4.2.0
   typescript: 5.0.4
 
 devDependencies:
@@ -102,8 +102,8 @@ devDependencies:
   rollup-plugin-dts: 5.3.0_4uaj55xah35he2rmgneoluguqy
   semantic-release: 21.0.1
   ts-node: 10.9.1_bhanhq442dy43ncydsavgi4jfi
-  ts-paths-esm-loader: 1.4.1_oqblkmemfqkcnei7kwj7q4lvza
-  tsconfig-paths: 4.1.2
+  ts-paths-esm-loader: 1.4.1_gzijze22djhmaeemwekwsfpsl4
+  tsconfig-paths: 4.2.0
   typescript: 5.0.4
 
 packages:
@@ -6354,14 +6354,14 @@ packages:
       yn: 3.1.1
     dev: true
 
-  /ts-paths-esm-loader/1.4.1_oqblkmemfqkcnei7kwj7q4lvza:
+  /ts-paths-esm-loader/1.4.1_gzijze22djhmaeemwekwsfpsl4:
     resolution: {integrity: sha512-5iSx5MLGc2FhOsB3zx3Avt6BZE/P8LBSIEYpAiez35xcI/zoZ29kbcwydkHxISWUslbKhFx0oSEalDykH4opKA==}
     peerDependencies:
       ts-node: ^10.4.0
       tsconfig-paths: ^3.12.0
     dependencies:
       ts-node: 10.9.1_bhanhq442dy43ncydsavgi4jfi
-      tsconfig-paths: 4.1.2
+      tsconfig-paths: 4.2.0
     dev: true
 
   /tsconfig-paths/3.14.1:
@@ -6373,8 +6373,8 @@ packages:
       strip-bom: 3.0.0
     dev: true
 
-  /tsconfig-paths/4.1.2:
-    resolution: {integrity: sha512-uhxiMgnXQp1IR622dUXI+9Ehnws7i/y6xvpZB9IbUVOPy0muvdvgXeZOn88UcGPiT98Vp3rJPTa8bFoalZ3Qhw==}
+  /tsconfig-paths/4.2.0:
+    resolution: {integrity: sha512-NoZ4roiN7LnbKn9QqE1amc9DJfzvZXxF4xDavcOWt1BPkdx+m+0gJuPM+S0vCe7zTJMYUP0R8pO2XMr+Y8oLIg==}
     engines: {node: '>=6'}
     dependencies:
       json5: 2.2.3
