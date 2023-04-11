@@ -29,7 +29,7 @@ specifiers:
   eslint-plugin-eslint-comments: 3.2.0
   eslint-plugin-functional: 5.0.7
   eslint-plugin-import: 2.27.5
-  eslint-plugin-jsdoc: 40.1.0
+  eslint-plugin-jsdoc: 40.3.0
   eslint-plugin-markdown: 3.0.0
   eslint-plugin-node: 11.1.0
   eslint-plugin-optimize-regex: 1.2.1
@@ -57,7 +57,7 @@ devDependencies:
   '@commitlint/cli': 17.5.1
   '@commitlint/config-conventional': 17.4.4
   '@cspell/dict-cryptocurrencies': 3.0.1
-  '@rebeccastevens/eslint-config': 1.6.7_fe4j7na2kzdajeowxyrnykvmju
+  '@rebeccastevens/eslint-config': 1.6.7_lp57zi72bqm4xsg6tktd5btica
   '@rollup/plugin-node-resolve': 15.0.2_rollup@3.20.2
   '@rollup/plugin-typescript': 11.0.0_dpenfibtlqpfrulx5rm72ngxhu
   '@semantic-release/changelog': 6.0.3_semantic-release@21.0.0
@@ -82,7 +82,7 @@ devDependencies:
   eslint-plugin-eslint-comments: 3.2.0_eslint@8.36.0
   eslint-plugin-functional: 5.0.7_j4766f7ecgqbon3u7zlxn5zszu
   eslint-plugin-import: 2.27.5_7be4xwoggtekrjxe2ygk7tcjfy
-  eslint-plugin-jsdoc: 40.1.0_eslint@8.36.0
+  eslint-plugin-jsdoc: 40.3.0_eslint@8.36.0
   eslint-plugin-markdown: 3.0.0_eslint@8.36.0
   eslint-plugin-node: 11.1.0_eslint@8.36.0
   eslint-plugin-optimize-regex: 1.2.1
@@ -851,7 +851,7 @@ packages:
       config-chain: 1.1.13
     dev: true
 
-  /@rebeccastevens/eslint-config/1.6.7_fe4j7na2kzdajeowxyrnykvmju:
+  /@rebeccastevens/eslint-config/1.6.7_lp57zi72bqm4xsg6tktd5btica:
     resolution: {integrity: sha512-n8ypIFJpJzw9h9ogL23Ezr8pHm1mpXtxekcqY3djiPh9FR7YTgU5uphqjrQtHzvnaW6RfFjdFUaeH1XK91kVdg==}
     engines: {node: '>=18.12.1'}
     peerDependencies:
@@ -878,7 +878,7 @@ packages:
       eslint-plugin-eslint-comments: 3.2.0_eslint@8.36.0
       eslint-plugin-functional: 5.0.7_j4766f7ecgqbon3u7zlxn5zszu
       eslint-plugin-import: 2.27.5_7be4xwoggtekrjxe2ygk7tcjfy
-      eslint-plugin-jsdoc: 40.1.0_eslint@8.36.0
+      eslint-plugin-jsdoc: 40.3.0_eslint@8.36.0
       eslint-plugin-markdown: 3.0.0_eslint@8.36.0
       eslint-plugin-node: 11.1.0_eslint@8.36.0
       eslint-plugin-optimize-regex: 1.2.1
@@ -2836,8 +2836,8 @@ packages:
       - supports-color
     dev: true
 
-  /eslint-plugin-jsdoc/40.1.0_eslint@8.36.0:
-    resolution: {integrity: sha512-ANvrhiu62VlSorARM0hup60VQsS3hNyp0Ca7cnJDj8tpJzM7tNhBVqMVYXSuLzEmqrpwx6aAh+NAN2DdAGG5fQ==}
+  /eslint-plugin-jsdoc/40.3.0_eslint@8.36.0:
+    resolution: {integrity: sha512-EhCqpzRkxoT2DUB4AnrU0ggBYvTh3bWrLZzQTupq6vSVE6XzNwJVKsOHa41GCoevnsWMBNmoDVjXWGqckjuG1g==}
     engines: {node: ^14 || ^16 || ^17 || ^18 || ^19}
     peerDependencies:
       eslint: ^7.0.0 || ^8.0.0
