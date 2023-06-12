@@ -14,8 +14,8 @@ devDependencies:
     specifier: 1.6.7
     version: 1.6.7(@typescript-eslint/eslint-plugin@5.58.0)(@typescript-eslint/parser@5.58.0)(eslint-import-resolver-typescript@3.5.5)(eslint-plugin-eslint-comments@3.2.0)(eslint-plugin-functional@5.0.7)(eslint-plugin-import@2.27.5)(eslint-plugin-jsdoc@40.3.0)(eslint-plugin-markdown@3.0.0)(eslint-plugin-node@11.1.0)(eslint-plugin-optimize-regex@1.2.1)(eslint-plugin-promise@6.1.1)(eslint-plugin-sonarjs@0.19.0)(eslint-plugin-unicorn@46.0.0)(eslint@8.38.0)
   '@rollup/plugin-node-resolve':
-    specifier: 15.0.2
-    version: 15.0.2(rollup@3.20.2)
+    specifier: 15.1.0
+    version: 15.1.0(rollup@3.20.2)
   '@rollup/plugin-typescript':
     specifier: 11.1.0
     version: 11.1.0(rollup@3.20.2)(typescript@5.0.4)
@@ -936,8 +936,8 @@ packages:
       eslint-plugin-unicorn: 46.0.0(eslint@8.38.0)
     dev: true
 
-  /@rollup/plugin-node-resolve@15.0.2(rollup@3.20.2):
-    resolution: {integrity: sha512-Y35fRGUjC3FaurG722uhUuG8YHOJRJQbI6/CkbRkdPotSpDj9NtIN85z1zrcyDcCQIW4qp5mgG72U+gJ0TAFEg==}
+  /@rollup/plugin-node-resolve@15.1.0(rollup@3.20.2):
+    resolution: {integrity: sha512-xeZHCgsiZ9pzYVgAo9580eCGqwh/XCEUM9q6iQfGNocjgkufHAqC3exA+45URvhiYV8sBF9RlBai650eNs7AsA==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       rollup: ^2.78.0||^3.0.0
