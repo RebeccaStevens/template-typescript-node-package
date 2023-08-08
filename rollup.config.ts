@@ -1,3 +1,4 @@
+import rollupPluginReplace from "@rollup/plugin-replace";
 import rollupPluginTypescript from "@rollup/plugin-typescript";
 import { type Plugin, type RollupOptions } from "rollup";
 import rollupPluginAutoExternal from "rollup-plugin-auto-external";
@@ -42,6 +43,11 @@ const runtimes = {
     rollupPluginAutoExternal(),
     rollupPluginTypescript({
       tsconfig: "tsconfig.build.json",
+    }),
+    rollupPluginReplace({
+      values: {
+        "import.meta.vitest": "undefined",
+      },
     }),
   ],
 } satisfies RollupOptions;

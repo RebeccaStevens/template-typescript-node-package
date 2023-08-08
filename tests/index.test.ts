@@ -1,5 +1,7 @@
-import test from "ava";
+import { expect, describe, it } from "vitest";
 
-test("nothing", (t) => {
-  t.pass();
+describe("noop", () => {
+  it("boop", () => {
+    expect(1).toBe(1);
+  });
 });
