@@ -1,12 +1,11 @@
-import rollupPluginNodeResolve from "@rollup/plugin-node-resolve";
 import rollupPluginTypescript from "@rollup/plugin-typescript";
-import { defineConfig, type Plugin } from "rollup";
+import { type Plugin, type RollupOptions } from "rollup";
 import rollupPluginAutoExternal from "rollup-plugin-auto-external";
 import rollupPluginDts from "rollup-plugin-dts";
 
 import pkg from "./package.json" assert { type: "json" };
 
-const common = defineConfig({
+const common = {
   input: "src/index.ts",
 
   output: {
@@ -21,9 +20,9 @@ const common = defineConfig({
     propertyReadSideEffects: false,
     unknownGlobalSideEffects: false,
   },
-});
+} satisfies RollupOptions;
 
-const runtimes = defineConfig({
+const runtimes = {
   ...common,
 
   output: [
@@ -41,14 +40,13 @@ const runtimes = defineConfig({
 
   plugins: [
     rollupPluginAutoExternal(),
-    rollupPluginNodeResolve(),
     rollupPluginTypescript({
       tsconfig: "tsconfig.build.json",
     }),
   ],
-});
+} satisfies RollupOptions;
 
-const types = defineConfig({
+const types = {
   ...common,
 
   output: [
@@ -65,11 +63,10 @@ const types = defineConfig({
   ],
 
   plugins: [
-    rollupPluginTypescript({
+    rollupPluginDts({
       tsconfig: "tsconfig.build.json",
     }),
-    rollupPluginDts(),
   ] as Plugin[],
-});
+} satisfies RollupOptions;
 
 export default [runtimes, types];
