@@ -2,6 +2,7 @@ bar
 baz
 boop
 corge
+deassert
 foo
 fred
 garply

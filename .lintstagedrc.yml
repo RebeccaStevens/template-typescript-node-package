@@ -6,9 +6,12 @@
   - prettier --ignore-unknown --write
   - eslint --fix
   - cspell lint --no-progress --show-suggestions --show-context --no-must-find-files --dot
-  - tsc --noEmit
+  - tsc-files -p tsconfig.build.json --noEmit
 
 "*.md":
   - prettier --ignore-unknown --write
   - markdownlint --config=.markdownlint.json --ignore-path=.markdownlintignore
   - cspell lint --no-progress --show-suggestions --show-context --no-must-find-files --dot
+
+"package.json":
+  - pnpm dedupe

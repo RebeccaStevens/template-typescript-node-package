@@ -1,78 +1,52 @@
 import rollupPluginReplace from "@rollup/plugin-replace";
-import rollupPluginTypescript from "@rollup/plugin-typescript";
-import { type Plugin, type RollupOptions } from "rollup";
+import { rollupPlugin as rollupPluginDeassert } from "deassert";
+import { type RollupOptions } from "rollup";
 import rollupPluginAutoExternal from "rollup-plugin-auto-external";
-import rollupPluginDts from "rollup-plugin-dts";
+import rollupPluginTs from "rollup-plugin-ts";
 
 import pkg from "./package.json" assert { type: "json" };
 
-const common = {
+const treeshake = {
+  annotations: true,
+  moduleSideEffects: [],
+  propertyReadSideEffects: false,
+  unknownGlobalSideEffects: false,
+} satisfies RollupOptions["treeshake"];
+
+const library = {
   input: "src/index.ts",
-
-  output: {
-    sourcemap: false,
-  },
-
-  external: [],
-
-  treeshake: {
-    annotations: true,
-    moduleSideEffects: [],
-    propertyReadSideEffects: false,
-    unknownGlobalSideEffects: false,
-  },
-} satisfies RollupOptions;
-
-const runtimes = {
-  ...common,
 
   output: [
     {
-      ...common.output,
       file: pkg.exports.import,
       format: "esm",
+      sourcemap: false,
     },
     {
-      ...common.output,
       file: pkg.exports.require,
       format: "cjs",
+      sourcemap: false,
     },
   ],
 
   plugins: [
     rollupPluginAutoExternal(),
-    rollupPluginTypescript({
+    rollupPluginTs({
+      transpileOnly: true,
       tsconfig: "tsconfig.build.json",
     }),
     rollupPluginReplace({
       values: {
         "import.meta.vitest": "undefined",
       },
+      preventAssignment: true,
+    }),
+    rollupPluginDeassert({
+      include: ["**/*.{js,ts}"],
     }),
   ],
+
+  treeshake,
 } satisfies RollupOptions;
 
-const types = {
-  ...common,
-
-  output: [
-    {
-      ...common.output,
-      file: pkg.exports.types.import,
-      format: "esm",
-    },
-    {
-      ...common.output,
-      file: pkg.exports.types.require,
-      format: "cjs",
-    },
-  ],
-
-  plugins: [
-    rollupPluginDts({
-      tsconfig: "tsconfig.build.json",
-    }),
-  ] as Plugin[],
-} satisfies RollupOptions;
-
-export default [runtimes, types];
+export default [library];

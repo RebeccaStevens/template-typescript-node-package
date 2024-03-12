@@ -25,9 +25,11 @@ export default defineConfig({
 
   test: {
     include: [testFilePattern],
+    exclude: ["lib", "node_modules"],
     coverage: {
       all: true,
-      include: ["src/**/*"],
+      include: ["src"],
+      exclude: ["dist"],
       reporter: ["lcov", "text"],
       watermarks: {
         lines: [80, 95],
