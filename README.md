@@ -1,6 +1,6 @@
 <div align="center">
 
-# Template for a Node Package using TypeScript
+# Template for my Node Packages
 
 [![npm version](https://img.shields.io/npm/v/__package_name__.svg)](https://www.npmjs.com/package/__package_name__)
 [![CI](https://github.com/RebeccaStevens/template-typescript-node-package/actions/workflows/release.yml/badge.svg)](https://github.com/RebeccaStevens/template-typescript-node-package/actions/workflows/release.yml)
