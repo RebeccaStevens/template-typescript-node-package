@@ -246,7 +246,7 @@
   // MD049/emphasis-style : Emphasis style : https://github.com/DavidAnson/markdownlint/blob/v0.33.0/doc/md049.md
   "MD049": {
     // Emphasis style
-    "style": "asterisk"
+    "style": "underscore"
   },
 
   // MD050/strong-style : Strong style : https://github.com/DavidAnson/markdownlint/blob/v0.33.0/doc/md050.md
