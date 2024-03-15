@@ -25,7 +25,7 @@ export default defineConfig({
 
   test: {
     include: [testFilePattern],
-    exclude: ["lib", "node_modules"],
+    exclude: ["dist", "node_modules"],
     coverage: {
       all: true,
       include: ["src"],
