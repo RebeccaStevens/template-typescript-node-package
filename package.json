@@ -48,7 +48,7 @@
     "lint:prettier": "prettier \"**/*\" --ignore-unknown --list-different",
     "lint:prettier-fix": "prettier \"**/*\" --ignore-unknown --write",
     "lint:spelling": "cspell \"**\" \".github/**/*\"",
-    "prepare": "husky install",
+    "prepare": "husky",
     "release": "semantic-release",
     "test": "pnpm run test:js",
     "test:js": "vitest --coverage --run",
