@@ -8,7 +8,6 @@
     "@rebeccastevens/eslint-config/modern",
     "@rebeccastevens/eslint-config/typescript",
     "@rebeccastevens/eslint-config/common-overrides",
-    "plugin:vitest/recommended",
     "plugin:prettier/recommended",
     "prettier"
   ],
