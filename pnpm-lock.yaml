@@ -143,12 +143,9 @@ devDependencies:
   lint-staged:
     specifier: 15.2.2
     version: 15.2.2
-  markdownlint:
-    specifier: 0.34.0
-    version: 0.34.0
-  markdownlint-cli:
-    specifier: 0.40.0
-    version: 0.40.0
+  markdownlint-cli2:
+    specifier: 0.13.0
+    version: 0.13.0
   prettier:
     specifier: 3.2.5
     version: 3.2.5
@@ -1709,7 +1706,7 @@ packages:
       aggregate-error: 5.0.0
       debug: 4.3.4
       dir-glob: 3.0.1
-      globby: 14.0.0
+      globby: 14.0.1
       http-proxy-agent: 7.0.0
       https-proxy-agent: 7.0.2
       issue-parser: 7.0.0
@@ -1774,8 +1771,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /@sindresorhus/merge-streams@1.0.0:
-    resolution: {integrity: sha512-rUV5WyJrJLoloD4NDN1V1+LDMDWOa4OTsT4yYJwQNpTU6FWxkxHpL7eu4w+DmiH8x/EAM1otkPE1+LaspIbplw==}
+  /@sindresorhus/merge-streams@2.3.0:
+    resolution: {integrity: sha512-LtoMMhxAlorcGhmFYI+LhPgbPZCkgP6ra1YL604EeF6U98pLlQ3iWIGMdWSC+vWmPBWBNgmDBAhnAobLROJmwg==}
     engines: {node: '>=18'}
     dev: true
 
@@ -4470,11 +4467,11 @@ packages:
       slash: 4.0.0
     dev: true
 
-  /globby@14.0.0:
-    resolution: {integrity: sha512-/1WM/LNHRAOH9lZta77uGbq0dAEQM+XjNesWwhlERDVenqothRbnzTrL3/LrIoEPPjeUHC3vrS6TwoyxeHs7MQ==}
+  /globby@14.0.1:
+    resolution: {integrity: sha512-jOMLD2Z7MAhyG8aJpNOpmziMOP4rPLcc95oQPKXBazW82z+CEgPFBQvEpRUa1KeIMUJo4Wsm+q6uzO/Q/4BksQ==}
     engines: {node: '>=18'}
     dependencies:
-      '@sindresorhus/merge-streams': 1.0.0
+      '@sindresorhus/merge-streams': 2.3.0
       fast-glob: 3.3.2
       ignore: 5.3.1
       path-type: 5.0.0
@@ -5186,11 +5183,6 @@ packages:
     engines: {'0': node >= 0.2.0}
     dev: true
 
-  /jsonpointer@5.0.1:
-    resolution: {integrity: sha512-p/nXbhSEcu3pZRdkW1OfJhpsVtW1gd4Wa1fnQc9YLiTfAjn0312eMKimbdIQzuZl9aa9xUGaRlP9T/CJE/ditQ==}
-    engines: {node: '>=0.10.0'}
-    dev: true
-
   /keyv@4.5.4:
     resolution: {integrity: sha512-oxVHkHR/EJf2CNXnWxRLW6mg7JyCCUcG0DtEGmL2ctUo1PNTin1PUil+r/+4r5MpVgC/fn1kjsx7mjSujKqIpw==}
     dependencies:
@@ -5486,22 +5478,25 @@ packages:
       uc.micro: 2.1.0
     dev: true
 
-  /markdownlint-cli@0.40.0:
-    resolution: {integrity: sha512-JXhI3dRQcaqwiFYpPz6VJ7aKYheD53GmTz9y4D/d0F1MbZDGOp9pqKlbOfUX/pHP/iAoeiE4wYRmk8/kjLakxA==}
+  /markdownlint-cli2-formatter-default@0.0.4(markdownlint-cli2@0.13.0):
+    resolution: {integrity: sha512-xm2rM0E+sWgjpPn1EesPXx5hIyrN2ddUnUwnbCsD/ONxYtw3PX6LydvdH6dciWAoFDpwzbHM1TO7uHfcMd6IYg==}
+    peerDependencies:
+      markdownlint-cli2: '>=0.0.4'
+    dependencies:
+      markdownlint-cli2: 0.13.0
+    dev: true
+
+  /markdownlint-cli2@0.13.0:
+    resolution: {integrity: sha512-Pg4nF7HlopU97ZXtrcVISWp3bdsuc5M0zXyLp2/sJv2zEMlInrau0ZKK482fQURzVezJzWBpNmu4u6vGAhij+g==}
     engines: {node: '>=18'}
     hasBin: true
     dependencies:
-      commander: 12.0.0
-      get-stdin: 9.0.0
-      glob: 10.3.12
-      ignore: 5.3.1
+      globby: 14.0.1
       js-yaml: 4.1.0
       jsonc-parser: 3.2.1
-      jsonpointer: 5.0.1
       markdownlint: 0.34.0
-      minimatch: 9.0.4
-      run-con: 1.3.2
-      toml: 3.0.0
+      markdownlint-cli2-formatter-default: 0.0.4(markdownlint-cli2@0.13.0)
+      micromatch: 4.0.5
     dev: true
 
   /markdownlint-micromark@0.1.9:
@@ -6600,16 +6595,6 @@ packages:
     engines: {node: '>=0.12.0'}
     dev: true
 
-  /run-con@1.3.2:
-    resolution: {integrity: sha512-CcfE+mYiTcKEzg0IqS08+efdnH0oJ3zV0wSUFBNrMHMuxCtXvBCLzCJHatwuXDcu/RlhjTziTo/a1ruQik6/Yg==}
-    hasBin: true
-    dependencies:
-      deep-extend: 0.6.0
-      ini: 4.1.1
-      minimist: 1.2.8
-      strip-json-comments: 3.1.1
-    dev: true
-
   /run-parallel@1.2.0:
     resolution: {integrity: sha512-5l4VyZR86LZ/lDxZTR6jqL8AFE2S0IFLMP26AbjsLVADxHdhB/c0GUsH+y39UfCi3dzz8OlQuPmnaJOMoDHQBA==}
     dependencies:
@@ -7242,10 +7227,6 @@ packages:
     resolution: {integrity: sha512-rLdvwXZ39VOn1IxGL3V6ZstoTbwLRckQmn/U8ZDLuWwIXNpuZDhQ3AiRUlhTbOXFVE9C+dR51wM0CBDhk31VcA==}
     dependencies:
       to-no-case: 1.0.2
-    dev: true
-
-  /toml@3.0.0:
-    resolution: {integrity: sha512-y/mWCZinnvxjTKYhJ+pYxwD0mRLVvOtdS2Awbgxln6iEnt4rk0yBxeSBHkGJcPucRiG0e55mwWp+g/05rsrd6w==}
     dev: true
 
   /traverse@0.6.8:
