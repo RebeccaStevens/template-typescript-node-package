@@ -72,7 +72,7 @@
     "@typescript-eslint/parser": "7.11.0",
     "@vitest/coverage-v8": "1.6.0",
     "commitizen": "4.3.0",
-    "cspell": "8.8.2",
+    "cspell": "8.9.1",
     "cz-conventional-changelog": "3.3.0",
     "deassert": "1.0.2",
     "eslint": "9.4.0",
