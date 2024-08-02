@@ -70,7 +70,7 @@
     "@types/node": "20.12.12",
     "@typescript-eslint/eslint-plugin": "7.18.0",
     "@typescript-eslint/parser": "7.18.0",
-    "@vitest/coverage-v8": "1.6.0",
+    "@vitest/coverage-v8": "2.0.5",
     "commitizen": "4.3.0",
     "cspell": "8.13.0",
     "cz-conventional-changelog": "3.3.0",
@@ -111,7 +111,7 @@
     "tsc-files": "1.1.4",
     "typescript": "5.4.5",
     "vite-tsconfig-paths": "4.3.2",
-    "vitest": "1.6.0",
+    "vitest": "2.0.5",
     "yaml-eslint-parser": "1.2.2"
   },
   "packageManager": "pnpm@9.1.2"
