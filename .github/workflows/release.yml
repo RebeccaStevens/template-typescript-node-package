@@ -29,10 +29,10 @@ jobs:
     uses: ./.github/workflows/lint-spelling.yml
   lint_yaml:
     uses: ./.github/workflows/lint-yaml.yml
-  test:
+  test_js:
     uses: ./.github/workflows/test-js.yml
   type_check:
-    uses: ./.github/workflows/type-check.yml
+    uses: ./.github/workflows/typecheck.yml
 
   release:
     needs:
@@ -42,7 +42,7 @@ jobs:
       - lint_packages
       - lint_spelling
       - lint_yaml
-      - test
+      - test_js
       - type_check
     runs-on: ubuntu-latest
     steps:

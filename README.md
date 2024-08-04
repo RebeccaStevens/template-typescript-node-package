@@ -17,6 +17,14 @@
 
 [Any donations would be much appreciated](./DONATIONS.md). 😄
 
+### Enterprise Users
+
+`__package_name__` is available as part of the [Tidelift Subscription](https://tidelift.com/funding/github/npm/__package_name__).
+
+Tidelift is working with the maintainers of `__package_name__` and a growing network of open source maintainers
+to ensure your open source software supply chain meets enterprise standards now and into the future.
+[Learn more.](https://tidelift.com/subscription/pkg/npm-__package_name__?utm_source=npm-__package_name__&utm_medium=referral&utm_campaign=enterprise&utm_term=repo)
+
 ## Installation
 
 ```sh

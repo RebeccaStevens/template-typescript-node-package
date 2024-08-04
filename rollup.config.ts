@@ -3,21 +3,19 @@ import { rollupPlugin as rollupPluginDeassert } from "deassert";
 import { type RollupOptions } from "rollup";
 import rollupPluginTs from "rollup-plugin-ts";
 
-import p from "./package.json" assert { type: "json" };
+import pkg from "./package.json" assert { type: "json" };
 
-const pkg = p as typeof p & {
+type PackageJSON = typeof pkg & {
   dependencies?: Record<string, string>;
   peerDependencies?: Record<string, string>;
 };
 
-const treeshake = {
-  annotations: true,
-  moduleSideEffects: [],
-  propertyReadSideEffects: false,
-  unknownGlobalSideEffects: false,
-} satisfies RollupOptions["treeshake"];
+const externalDependencies = [
+  ...Object.keys((pkg as PackageJSON).dependencies ?? {}),
+  ...Object.keys((pkg as PackageJSON).peerDependencies ?? {}),
+];
 
-const library = {
+export default {
   input: "src/index.ts",
 
   output: [
@@ -31,11 +29,6 @@ const library = {
       format: "cjs",
       sourcemap: false,
     },
-  ],
-
-  external: [
-    ...Object.keys(pkg.dependencies ?? {}),
-    ...Object.keys(pkg.peerDependencies ?? {}),
   ],
 
   plugins: [
@@ -54,7 +47,20 @@ const library = {
     }),
   ],
 
-  treeshake,
-} satisfies RollupOptions;
+  treeshake: {
+    annotations: true,
+    moduleSideEffects: [],
+    propertyReadSideEffects: false,
+    unknownGlobalSideEffects: false,
+  },
 
-export default [library];
+  external: (source) => {
+    if (
+      source.startsWith("node:") ||
+      externalDependencies.some((dep) => source.startsWith(dep))
+    ) {
+      return true;
+    }
+    return undefined;
+  },
+} as RollupOptions;

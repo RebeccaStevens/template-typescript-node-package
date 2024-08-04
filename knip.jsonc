@@ -1,5 +1,13 @@
 {
   "$schema": "node_modules/knip/schema-jsonc.json",
-  "entry": ["src/index.ts!"],
-  "project": ["src/**/*.ts!"],
+  "entry": ["src/index.ts!", "tests/**/*.test.ts"],
+  "project": ["src/**/*.ts!", "tests/**/*.{js,ts}"],
+  "ignore": ["tests/fixture/file.ts"],
+  "ignoreDependencies": [
+    // Unknown reason for issue.
+    "@vitest/coverage-v8",
+
+    // Lint staged
+    "tsc-files",
+  ],
 }
