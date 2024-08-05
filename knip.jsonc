@@ -9,5 +9,8 @@
 
     // Lint staged
     "tsc-files",
+
+    // Eslint
+    "@eslint/compat",
   ],
 }
