@@ -34,23 +34,14 @@
     "yaml"
   ],
 
-  "editor.rulers": [80],
+  "editor.rulers": [120],
   "typescript.tsdk": "node_modules/typescript/lib",
   "json.schemas": [
     {
-      "fileMatch": [
-        "*.jsonc",
-        "tsconfig.json",
-        "tsconfig.*.json",
-        ".vscode/*.json"
-      ],
+      "fileMatch": ["**/*.jsonc", "**/tsconfig.json", "**/tsconfig.*.json", ".vscode/*.json"],
       "schema": {
         "allowTrailingCommas": true
       }
     }
-  ],
-
-  "[markdown]": {
-    "editor.rulers": [120]
-  }
+  ]
 }

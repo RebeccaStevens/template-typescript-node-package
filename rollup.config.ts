@@ -1,7 +1,8 @@
 import rollupPluginReplace from "@rollup/plugin-replace";
-import { rollupPlugin as rollupPluginDeassert } from "deassert";
+import rollupPluginTypescript from "@rollup/plugin-typescript";
 import type { RollupOptions } from "rollup";
-import rollupPluginTs from "rollup-plugin-ts";
+import rollupPluginDeassert from "rollup-plugin-deassert";
+import { generateDtsBundle } from "rollup-plugin-dts-bundle-generator";
 
 import pkg from "./package.json" with { type: "json" };
 
@@ -23,17 +24,37 @@ export default {
       file: pkg.exports.import,
       format: "esm",
       sourcemap: false,
+      plugins: [
+        generateDtsBundle({
+          compilation: {
+            preferredConfigPath: "tsconfig.build.json",
+          },
+          outFile: pkg.exports.types.import,
+        }) as any,
+      ],
     },
     {
       file: pkg.exports.require,
       format: "cjs",
       sourcemap: false,
+      plugins: [
+        generateDtsBundle({
+          compilation: {
+            preferredConfigPath: "tsconfig.build.json",
+          },
+          outFile: pkg.exports.types.require,
+        }) as any,
+      ],
     },
   ],
 
   plugins: [
-    rollupPluginTs({
-      transpileOnly: true,
+    rollupPluginTypescript({
+      compilerOptions: {
+        noCheck: true,
+        declaration: false,
+        isolatedDeclarations: false,
+      },
       tsconfig: "tsconfig.build.json",
     }),
     rollupPluginReplace({
@@ -55,12 +76,9 @@ export default {
   },
 
   external: (source) => {
-    if (
-      source.startsWith("node:") ||
-      externalDependencies.some((dep) => source.startsWith(dep))
-    ) {
+    if (source.startsWith("node:") || externalDependencies.some((dep) => source.startsWith(dep))) {
       return true;
     }
     return undefined;
   },
-} as RollupOptions;
+} satisfies RollupOptions;
