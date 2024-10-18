@@ -71,16 +71,16 @@
     "typecheck": "tsc -p tsconfig.build.json --noEmit"
   },
   "resolutions": {
-    "dts-bundle-generator": "9.2.1"
+    "dts-bundle-generator": "9.5.1"
   },
   "devDependencies": {
     "@commitlint/cli": "19.5.0",
     "@commitlint/config-conventional": "19.5.0",
     "@cspell/dict-cryptocurrencies": "5.0.3",
-    "@eslint/compat": "1.2.0",
+    "@eslint/compat": "1.2.1",
     "@rebeccastevens/eslint-config": "3.3.2",
     "@rollup/plugin-replace": "6.0.1",
-    "@rollup/plugin-typescript": "12.1.0",
+    "@rollup/plugin-typescript": "12.1.1",
     "@sebbo2002/semantic-release-jsr": "2.0.1",
     "@semantic-release/changelog": "6.0.3",
     "@semantic-release/commit-analyzer": "13.0.0",
@@ -89,7 +89,7 @@
     "@semantic-release/npm": "12.0.1",
     "@semantic-release/release-notes-generator": "14.0.1",
     "@stylistic/eslint-plugin": "2.9.0",
-    "@types/node": "22.7.5",
+    "@types/node": "22.7.6",
     "@typescript-eslint/eslint-plugin": "8.8.1",
     "@typescript-eslint/parser": "8.8.1",
     "@vitest/coverage-v8": "2.1.2",
@@ -106,7 +106,7 @@
     "eslint-plugin-format": "0.1.2",
     "eslint-plugin-functional": "7.0.2",
     "eslint-plugin-import-x": "4.3.1",
-    "eslint-plugin-jsdoc": "50.3.2",
+    "eslint-plugin-jsdoc": "50.4.3",
     "eslint-plugin-jsonc": "2.16.0",
     "eslint-plugin-markdown": "5.1.0",
     "eslint-plugin-n": "17.11.1",
@@ -115,7 +115,7 @@
     "eslint-plugin-prettier": "5.2.1",
     "eslint-plugin-promise": "7.1.0",
     "eslint-plugin-regexp": "2.6.0",
-    "eslint-plugin-sonarjs": "2.0.3",
+    "eslint-plugin-sonarjs": "2.0.4",
     "eslint-plugin-unicorn": "56.0.0",
     "eslint-plugin-yml": "1.14.0",
     "husky": "9.1.6",
@@ -136,5 +136,5 @@
     "vitest": "2.1.2",
     "yaml-eslint-parser": "1.2.3"
   },
-  "packageManager": "pnpm@9.12.1"
+  "packageManager": "pnpm@9.12.2"
 }
