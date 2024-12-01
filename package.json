@@ -74,8 +74,8 @@
     "dts-bundle-generator": "9.2.1"
   },
   "devDependencies": {
-    "@commitlint/cli": "19.5.0",
-    "@commitlint/config-conventional": "19.5.0",
+    "@commitlint/cli": "19.6.0",
+    "@commitlint/config-conventional": "19.6.0",
     "@cspell/dict-cryptocurrencies": "5.0.3",
     "@eslint/compat": "1.2.2",
     "@rebeccastevens/eslint-config": "3.3.3",
