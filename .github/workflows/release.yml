@@ -32,19 +32,20 @@ jobs:
     uses: ./.github/workflows/lint-yaml.yml
   test_js:
     uses: ./.github/workflows/test-js.yml
-  type_check:
+  typecheck:
     uses: ./.github/workflows/typecheck.yml
 
   release:
     needs:
       - lint_js
+      - lint_knip_dev
       - lint_knip_prod
       - lint_markdown
       - lint_packages
       - lint_spelling
       - lint_yaml
       - test_js
-      - type_check
+      - typecheck
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

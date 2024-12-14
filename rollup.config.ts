@@ -34,18 +34,19 @@ export default {
 
   plugins: [
     rollupPluginTypescript({
-      compilerOptions: {
-        noCheck: true,
-        declaration: false,
-        isolatedDeclarations: false,
-      },
-      tsconfig: "src/tsconfig.json",
+      tsconfig: "src/tsconfig.build.json",
     }),
     rollupPluginDeassert({
       include: ["**/*.{js,ts}"],
     }),
     generateDtsBundle({
-      preferredConfigPath: "src/tsconfig.json",
+      compilation: {
+        preferredConfigPath: "src/tsconfig.build.json",
+      },
+      output: {
+        exportReferencedTypes: false,
+        inlineDeclareExternals: true,
+      },
     }),
   ],
 

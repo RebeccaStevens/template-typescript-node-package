@@ -31,10 +31,10 @@
   "type": "module",
   "exports": {
     "types": {
-      "import": "./dist/index.d.mts",
+      "import": "./dist/index.d.ts",
       "require": "./dist/index.d.cts"
     },
-    "import": "./dist/index.mjs",
+    "import": "./dist/index.js",
     "require": "./dist/index.cjs"
   },
   "files": [
@@ -68,14 +68,16 @@
     "test": "pnpm run test:js",
     "test:js": "vitest --coverage",
     "test:js-run": "vitest run --coverage",
-    "typecheck": "tsc -p ./src/tsconfig.json --noEmit"
+    "typecheck": "pnpm run typecheck:root && pnpm run typecheck:src",
+    "typecheck:root": "tsc -p ./tsconfig.json --noEmit",
+    "typecheck:src": "tsc -p ./src/tsconfig.json --noEmit"
   },
   "devDependencies": {
     "@commitlint/cli": "19.6.0",
     "@commitlint/config-conventional": "19.6.0",
     "@cspell/dict-cryptocurrencies": "5.0.3",
     "@eslint/compat": "1.2.4",
-    "@rebeccastevens/eslint-config": "3.3.4",
+    "@rebeccastevens/eslint-config": "3.4.0",
     "@rollup/plugin-typescript": "12.1.1",
     "@sebbo2002/semantic-release-jsr": "2.0.2",
     "@semantic-release/changelog": "6.0.3",
@@ -93,7 +95,7 @@
     "commitizen": "4.3.1",
     "cspell": "8.16.1",
     "cz-conventional-changelog": "3.3.0",
-    "eslint": "9.16.0",
+    "eslint": "9.17.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-flat-config-utils": "0.4.0",
     "eslint-import-resolver-typescript": "3.7.0",
@@ -116,7 +118,7 @@
     "eslint-plugin-yml": "1.16.0",
     "husky": "9.1.7",
     "jsonc-eslint-parser": "2.4.0",
-    "knip": "5.39.4",
+    "knip": "5.40.0",
     "lint-staged": "15.2.11",
     "markdownlint-cli2": "0.16.0",
     "prettier": "3.4.2",
@@ -124,7 +126,7 @@
     "rimraf": "6.0.1",
     "rollup": "4.28.1",
     "rollup-plugin-deassert": "1.3.0",
-    "rollup-plugin-dts-bundle-generator-2": "1.0.2",
+    "rollup-plugin-dts-bundle-generator-2": "2.0.0",
     "semantic-release": "24.2.0",
     "tsc-files": "1.1.4",
     "typescript": "5.7.2",
