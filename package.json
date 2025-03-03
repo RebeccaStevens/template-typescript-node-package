@@ -73,8 +73,8 @@
     "typecheck:src": "tsc -p ./src/tsconfig.json --noEmit"
   },
   "devDependencies": {
-    "@commitlint/cli": "19.6.1",
-    "@commitlint/config-conventional": "19.6.0",
+    "@commitlint/cli": "19.7.1",
+    "@commitlint/config-conventional": "19.7.1",
     "@cspell/dict-cryptocurrencies": "5.0.4",
     "@eslint/compat": "1.2.4",
     "@rebeccastevens/eslint-config": "3.5.2",
