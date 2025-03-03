@@ -22,7 +22,7 @@ importers:
         version: 1.2.4(eslint@9.21.0(jiti@2.4.2))
       '@rebeccastevens/eslint-config':
         specifier: 3.5.2
-        version: 3.5.2(yxp7l7w6jfsclxllbzflef4xii)
+        version: 3.5.2(0d428f97387b7dd9d07051446cd8b002)
       '@rollup/plugin-typescript':
         specifier: 12.1.2
         version: 12.1.2(rollup@4.30.1)(tslib@2.6.3)(typescript@5.7.2)
@@ -6605,7 +6605,7 @@ snapshots:
       '@pnpm/network.ca-file': 1.0.2
       config-chain: 1.1.13
 
-  '@rebeccastevens/eslint-config@3.5.2(yxp7l7w6jfsclxllbzflef4xii)':
+  '@rebeccastevens/eslint-config@3.5.2(0d428f97387b7dd9d07051446cd8b002)':
     dependencies:
       '@antfu/install-pkg': 0.5.0
       '@clack/prompts': 0.9.0
