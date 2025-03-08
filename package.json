@@ -120,7 +120,6 @@
     "lint-staged": "15.4.3",
     "markdownlint-cli2": "0.17.2",
     "prettier": "3.5.3",
-    "prettier-plugin-packagejson": "2.5.10",
     "rimraf": "6.0.1",
     "rollup": "4.34.9",
     "rollup-plugin-deassert": "1.3.0",
