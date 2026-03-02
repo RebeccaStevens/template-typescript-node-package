@@ -1,5 +1,5 @@
 {
-  "name": "__package_name__",
+  "name": "package_name",
   "version": "0.0.0-development",
   "private": true,
   "description": "",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/RebeccaStevens/template-typescript-node-package"
+    "url": "git+https://github.com/RebeccaStevens/template-typescript-node-package.git"
   },
   "funding": [
     {
@@ -19,7 +19,7 @@
     },
     {
       "type": "tidelift",
-      "url": "https://tidelift.com/funding/github/npm/__package_name__"
+      "url": "https://tidelift.com/funding/github/npm/package_name"
     }
   ],
   "license": "BSD-3-Clause",

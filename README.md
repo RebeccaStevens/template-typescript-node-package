@@ -2,8 +2,8 @@
 
 # Template for my Node Packages
 
-[![npm version](https://img.shields.io/npm/v/__package_name__.svg)](https://www.npmjs.com/package/__package_name__)
-[![jsr Version](https://img.shields.io/jsr/v/__package_name__.svg)](https://jsr.io/__package_name__)
+[![npm version](https://img.shields.io/npm/v/package_name.svg)](https://www.npmjs.com/package/package_name)
+[![jsr Version](https://img.shields.io/jsr/v/package_name.svg)](https://jsr.io/package_name)
 [![CI](https://github.com/RebeccaStevens/template-typescript-node-package/actions/workflows/release.yml/badge.svg)](https://github.com/RebeccaStevens/template-typescript-node-package/actions/workflows/release.yml)
 [![Coverage Status](https://codecov.io/gh/RebeccaStevens/template-typescript-node-package/branch/main/graph/badge.svg?token=MVpR1oAbIT)](https://codecov.io/gh/RebeccaStevens/template-typescript-node-package)\
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
@@ -20,11 +20,11 @@
 
 ### Enterprise Users
 
-`__package_name__` is available as part of the [Tidelift Subscription](https://tidelift.com/funding/github/npm/__package_name__).
+`package_name` is available as part of the [Tidelift Subscription](https://tidelift.com/funding/github/npm/package_name).
 
-Tidelift is working with the maintainers of `__package_name__` and a growing network of open source maintainers
+Tidelift is working with the maintainers of `package_name` and a growing network of open source maintainers
 to ensure your open source software supply chain meets enterprise standards now and into the future.
-[Learn more.](https://tidelift.com/subscription/pkg/npm-__package_name__?utm_source=npm-__package_name__&utm_medium=referral&utm_campaign=enterprise&utm_term=repo)
+[Learn more.](https://tidelift.com/subscription/pkg/npm-package_name?utm_source=npm-package_name&utm_medium=referral&utm_campaign=enterprise&utm_term=repo)
 
 ## Installation
 
@@ -32,27 +32,27 @@ to ensure your open source software supply chain meets enterprise standards now 
 
 ```sh
 # Install with npm
-npm install __package_name__
+npm install package_name
 
 # Install with pnpm
-pnpm add __package_name__
+pnpm add package_name
 
 # Install with yarn
-yarn add __package_name__
+yarn add package_name
 
 # Install with bun
-bun add __package_name__
+bun add package_name
 ```
 
 ### jsr
 
 ```sh
 # Install in a node project
-npx jsr add __package_name__
+npx jsr add package_name
 
 # Install in a deno project
-deno add jsr:__package_name__
+deno add jsr:package_name
 
 # Install in a bun project
-bunx jsr add __package_name__
+bunx jsr add package_name
 ```
