@@ -15,7 +15,7 @@
   ],
   "automerge": true,
   "automergeStrategy": "fast-forward",
-  "automergeType": "branch",
+  "automergeType": "pr",
   "labels": ["Type: Maintenance", ":blue_heart:"],
   "rebaseWhen": "conflicted",
   "postUpdateOptions": ["pnpmDedupe"],
