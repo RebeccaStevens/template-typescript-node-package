@@ -4,8 +4,8 @@ Any donations would be much appreciated. 😄
 
 ## Enterprise Users
 
-`__package_name__` is available as part of the
-[Tidelift Subscription](https://tidelift.com/funding/github/npm/__package_name__).
+`package_name` is available as part of the
+[Tidelift Subscription](https://tidelift.com/funding/github/npm/package_name).
 
 ## Real money
 
