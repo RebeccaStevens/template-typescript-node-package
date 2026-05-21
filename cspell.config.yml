@@ -47,6 +47,7 @@ ignorePaths:
   - package.json
   - patches
   - pnpm-lock.yaml
+  - pnpm-workspace.yaml
   - project-dictionary.txt
 
 ignoreRegExpList:
