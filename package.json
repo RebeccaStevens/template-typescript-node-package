@@ -51,7 +51,8 @@
     "README.md"
   ],
   "scripts": {
-    "build": "rimraf dist && rollup -c rollup.config.ts --configPlugin @rollup/plugin-typescript --configImportAttributesKey with",
+    "build": "wireit",
+    "build:force": "rimraf dist && rollup -c rollup.config.ts --configPlugin @rollup/plugin-typescript --configImportAttributesKey with",
     "cz": "git-cz",
     "init": "node --no-warnings=ExperimentalWarning --experimental-strip-types scripts/init.ts",
     "lint": "eslint && pnpm run lint:md && pnpm run lint:spelling && pnpm run lint:knip && pnpm run lint:package && pnpm run lint:attw && pnpm run lint:packages",
@@ -78,6 +79,22 @@
     "typecheck": "pnpm run typecheck:root && pnpm run typecheck:src",
     "typecheck:root": "tsc -p ./tsconfig.json --noEmit",
     "typecheck:src": "tsc -p ./src/tsconfig.json --noEmit"
+  },
+  "wireit": {
+    "build": {
+      "command": "pnpm run build:force",
+      "files": [
+        "src/**",
+        "rollup.config.ts",
+        "package.json",
+        "tsconfig.json",
+        "src/tsconfig.json",
+        "src/tsconfig.build.json"
+      ],
+      "output": [
+        "dist/**"
+      ]
+    }
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.5",
@@ -133,6 +150,7 @@
     "tsc-files": "1.1.4",
     "typescript": "6.0.3",
     "vitest": "4.1.10",
+    "wireit": "0.14.13",
     "yaml-eslint-parser": "2.1.0"
   },
   "packageManager": "pnpm@11.18.0",

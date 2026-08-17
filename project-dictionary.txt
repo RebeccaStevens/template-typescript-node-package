@@ -23,4 +23,5 @@ sonarjs
 Stevens
 thud
 waldo
+wireit
 xyzzy

@@ -37,6 +37,7 @@ ignorePaths:
   - .markdownlint-cli2.jsonc
   - .npmrc
   - .vscode
+  - .wireit
   - CHANGELOG.md
   - coverage
   - cspell.config.yml
