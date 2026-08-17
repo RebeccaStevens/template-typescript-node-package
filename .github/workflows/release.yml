@@ -55,6 +55,7 @@ jobs:
         run: pnpm run build
 
       - name: Release
+        # Note: Uncomment the pnpm run release command once repository release tokens (NPM_TOKEN, etc.) are configured.
         run: echo "Do Release Here"
         # run: pnpm run release
         # env:
