@@ -1,7 +1,9 @@
 bar
 baz
 boop
+commitlintrc
 corge
+czrc
 deassert
 foo
 fred
@@ -15,6 +17,8 @@ plugh
 quux
 qux
 Rebecca
+releaserc
+sebbo
 sonarjs
 Stevens
 thud

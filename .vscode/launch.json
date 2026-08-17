@@ -5,18 +5,13 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "tsx",
+      "name": "Current TS File",
       "type": "node",
       "request": "launch",
 
       // Debug current file.
       "program": "${file}",
-
-      /*
-       * Path to tsx binary.
-       * Assuming locally installed.
-       */
-      "runtimeExecutable": "${workspaceRoot}/node_modules/.bin/tsx",
+      "runtimeArgs": ["--no-warnings=ExperimentalWarning", "--experimental-strip-types"],
 
       "smartStep": true,
 
@@ -42,7 +37,7 @@
       "request": "launch",
 
       // Run tester.
-      "program": "${workspaceRoot}/node_modules/vitest/vitest.mjs",
+      "program": "${workspaceFolder}/node_modules/vitest/vitest.mjs",
       "args": ["run", "${relativeFile}"],
       "autoAttachChildProcesses": true,
 

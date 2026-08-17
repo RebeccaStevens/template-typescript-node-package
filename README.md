@@ -3,9 +3,13 @@
 # Template for my Node Packages
 
 [![npm version](https://img.shields.io/npm/v/package_name.svg)](https://www.npmjs.com/package/package_name)
+<!-- template-jsr-badge-start -->
+
 [![jsr Version](https://img.shields.io/jsr/v/package_name.svg)](https://jsr.io/package_name)
+<!-- template-jsr-badge-end -->
+
 [![CI](https://github.com/RebeccaStevens/template-typescript-node-package/actions/workflows/release.yml/badge.svg)](https://github.com/RebeccaStevens/template-typescript-node-package/actions/workflows/release.yml)
-[![Coverage Status](https://codecov.io/gh/RebeccaStevens/template-typescript-node-package/branch/main/graph/badge.svg?token=MVpR1oAbIT)](https://codecov.io/gh/RebeccaStevens/template-typescript-node-package)\
+[![Coverage Status](https://codecov.io/gh/RebeccaStevens/template-typescript-node-package/branch/main/graph/badge.svg)](https://codecov.io/gh/RebeccaStevens/template-typescript-node-package)\
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![GitHub Discussions](https://img.shields.io/github/discussions/RebeccaStevens/template-typescript-node-package?style=flat-square)](https://github.com/RebeccaStevens/template-typescript-node-package/discussions)
 [![BSD 3 Clause license](https://img.shields.io/github/license/RebeccaStevens/template-typescript-node-package.svg?style=flat-square)](https://opensource.org/licenses/BSD-3-Clause)
@@ -14,9 +18,42 @@
 
 </div>
 
+<!-- template-init-start -->
+
+## Template Setup
+
+To create and initialize a new package using `npx`:
+
+```sh
+npx github:RebeccaStevens/template-typescript-node-package my-new-package
+```
+
+For advanced configuration (license selection, test suite, JSR, Renovate, and Commitizen toggles) via `npx`:
+
+```sh
+npx github:RebeccaStevens/template-typescript-node-package my-new-package --advanced
+```
+
+Or run directly inside a cloned repository:
+
+```sh
+pnpm run init
+```
+
+For advanced configuration inside a cloned repository:
+
+```sh
+pnpm run init -- --advanced
+```
+
+This section will be automatically removed once template initialization completes.
+<!-- template-init-end -->
+<!-- template-donations-start -->
+
 ## Donate
 
 [Any donations would be much appreciated](./DONATIONS.md). 😄
+<!-- template-tidelift-start -->
 
 ### Enterprise Users
 
@@ -25,6 +62,8 @@
 Tidelift is working with the maintainers of `package_name` and a growing network of open source maintainers
 to ensure your open source software supply chain meets enterprise standards now and into the future.
 [Learn more.](https://tidelift.com/subscription/pkg/npm-package_name?utm_source=npm-package_name&utm_medium=referral&utm_campaign=enterprise&utm_term=repo)
+<!-- template-tidelift-end -->
+<!-- template-donations-end -->
 
 ## Installation
 
@@ -44,6 +83,8 @@ yarn add package_name
 bun add package_name
 ```
 
+<!-- template-jsr-install-start -->
+
 ### jsr
 
 ```sh
@@ -56,3 +97,5 @@ deno add jsr:package_name
 # Install in a bun project
 bunx jsr add package_name
 ```
+
+<!-- template-jsr-install-end -->

@@ -1,11 +1,13 @@
 # Donations
 
 Any donations would be much appreciated. 😄
+<!-- template-tidelift-start -->
 
 ## Enterprise Users
 
 `package_name` is available as part of the
 [Tidelift Subscription](https://tidelift.com/funding/github/npm/package_name).
+<!-- template-tidelift-end -->
 
 ## Real money
 
