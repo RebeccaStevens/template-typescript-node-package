@@ -1,7 +1,9 @@
 import { describe, expect, it } from "vitest";
 
-describe("noop", () => {
-  it("boop", () => {
-    expect(1).toBe(1);
+import { helloWorld } from "../src/index.ts";
+
+describe("helloWorld", () => {
+  it("should return greeting", () => {
+    expect(helloWorld()).toBe("Hello World");
   });
 });
