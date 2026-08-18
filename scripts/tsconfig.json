@@ -1,0 +1,15 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "module": "preserve",
+    "moduleResolution": "bundler",
+    "allowJs": false,
+    "declaration": false,
+    "noEmit": false,
+    "outDir": ".",
+    "rootDir": ".",
+    "tsBuildInfoFile": null
+  },
+  "include": ["*.ts"],
+  "exclude": []
+}

@@ -41,10 +41,11 @@
   "module": "./dist/index.js",
   "types": "./dist/index.d.cts",
   "bin": {
-    "create-template-typescript-node-package": "./scripts/init.ts"
+    "create-template-typescript-node-package": "./scripts/init.js"
   },
   "files": [
     "dist/",
+    "scripts/init.js",
     "package.json",
     "CHANGELOG.md",
     "LICENSE",
@@ -54,7 +55,7 @@
     "build": "wireit",
     "build:force": "rimraf dist && rollup -c rollup.config.ts --configPlugin @rollup/plugin-typescript --configImportAttributesKey with",
     "cz": "git-cz",
-    "init": "node --no-warnings=ExperimentalWarning --experimental-strip-types scripts/init.ts",
+    "init": "node scripts/init.js",
     "lint": "eslint && pnpm run lint:md && pnpm run lint:spelling && pnpm run lint:knip && pnpm run lint:package && pnpm run lint:attw && pnpm run lint:packages",
     "lint:attw": "attw --pack .",
     "lint:js": "eslint \"**/*.?([cm])[jt]s?(x)\"",
