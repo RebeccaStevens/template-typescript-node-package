@@ -220,7 +220,7 @@ try {
     const targetArg = positionalArg;
     if (targetArg !== undefined && targetArg.trim() !== "") {
         const targetPath = path.resolve(targetArg.trim());
-        const sourcePath = process.cwd();
+        const sourcePath = path.resolve(import.meta.dirname, "..");
         if (targetPath !== sourcePath) {
             console.log(`📁 Target directory specified: ${targetArg.trim()}\n`);
             await fs.mkdir(targetPath, { recursive: true });
