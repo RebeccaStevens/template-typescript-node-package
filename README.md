@@ -25,13 +25,13 @@
 To create and initialize a new package using `npx`:
 
 ```sh
-npx github:RebeccaStevens/template-typescript-node-package my-new-package
+npx --allow-git=all github:RebeccaStevens/template-typescript-node-package my-new-package
 ```
 
 For advanced configuration (license selection, test suite, JSR, Renovate, and Commitizen toggles) via `npx`:
 
 ```sh
-npx github:RebeccaStevens/template-typescript-node-package my-new-package --advanced
+npx --allow-git=all github:RebeccaStevens/template-typescript-node-package my-new-package --advanced
 ```
 
 Or run directly inside a cloned repository:
