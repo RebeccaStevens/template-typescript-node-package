@@ -53,6 +53,15 @@ function normalize(str: string): string {
   return str.trim().toLowerCase().replaceAll(/\s+/gu, " ");
 }
 
+async function ignoreSyncPath(filePath: string): Promise<void> {
+  const syncWfPath = path.resolve(".github/workflows/template-sync.yml");
+  try {
+    await fs.appendFile(syncWfPath, `            ${filePath}\n`, "utf8");
+  } catch {
+    // ignore
+  }
+}
+
 /**
  * Strips a delimited comment block from text.
  *
@@ -451,11 +460,13 @@ try {
     }
     try {
       await fs.unlink(path.resolve("vitest.config.ts"));
+      await ignoreSyncPath("vitest.config.ts");
     } catch {
       // ignore
     }
     try {
       await fs.unlink(path.resolve(".github/workflows/test-js.yml"));
+      await ignoreSyncPath(".github/workflows/test-js.yml");
     } catch {
       // ignore
     }
@@ -473,6 +484,7 @@ try {
     // Remove codecov config when tests are disabled
     try {
       await fs.unlink(path.resolve(".github/codecov.yml"));
+      await ignoreSyncPath(".github/codecov.yml");
     } catch {
       // ignore
     }
@@ -528,6 +540,7 @@ try {
   if (!includeRenovate) {
     try {
       await fs.unlink(path.resolve(".github/renovate.json"));
+      await ignoreSyncPath(".github/renovate.json");
     } catch {
       // ignore
     }
@@ -537,17 +550,20 @@ try {
   if (!includeCommitizen) {
     try {
       await fs.unlink(path.resolve(".czrc"));
+      await ignoreSyncPath(".czrc");
     } catch {
       // ignore
     }
     try {
       await fs.unlink(path.resolve(".commitlintrc.cjs"));
+      await ignoreSyncPath(".commitlintrc.cjs");
     } catch {
       // ignore
     }
     // Remove the husky commit-msg hook that depends on commitlint
     try {
       await fs.unlink(path.resolve(".husky/commit-msg"));
+      await ignoreSyncPath(".husky/commit-msg");
     } catch {
       // ignore
     }
