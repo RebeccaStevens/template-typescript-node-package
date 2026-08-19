@@ -462,12 +462,10 @@ try {
     const releaseWfPath = path.resolve(".github/workflows/release.yml");
     try {
       const rawRelease = await fs.readFile(releaseWfPath, "utf8");
+
       const updatedRelease = rawRelease
-        .replaceAll(
-          /^\s*test_js:[\t\v\f\r \u00A0\u1680\u2000-\u200A\u2028\u2029\u202F\u205F\u3000\uFEFF]*\n\s*uses:\s*\.\/\.github\/workflows\/test-js\.yml\s*/gmu,
-          "",
-        )
-        .replaceAll(/^\s*-\s*test_js\s*/gmu, "");
+        .replaceAll(/^[\t ]*test_js:\s*\n[\t ]*uses:\s*\.\/\.github\/workflows\/test-js\.yml[\t ]*\n?/gmu, "")
+        .replaceAll(/^[\t ]*-[\t ]*test_js[\t ]*\n?/gmu, "");
       await fs.writeFile(releaseWfPath, updatedRelease, "utf8");
     } catch {
       // ignore
@@ -493,6 +491,15 @@ try {
     } catch {
       // ignore
     }
+    // Disable tests in eslint.config.js
+    try {
+      const eslintPath = path.resolve("eslint.config.js");
+      const eslintRaw = await fs.readFile(eslintPath, "utf8");
+      const updatedEslint = eslintRaw.replace(/(\s*)(mode: "library",)/u, "$1test: false,$1$2");
+      await fs.writeFile(eslintPath, updatedEslint, "utf8");
+    } catch {
+      // ignore
+    }
   }
 
   // Remove JSR configuration if user opts out
@@ -505,7 +512,11 @@ try {
     const releasercPath = path.resolve(".releaserc.yml");
     try {
       const rawReleaserc = await fs.readFile(releasercPath, "utf8");
-      const updatedReleaserc = rawReleaserc.replaceAll(/^\s*-\s*["']?@sebbo2002\/semantic-release-jsr["']?\s*/gmu, "");
+
+      const updatedReleaserc = rawReleaserc.replaceAll(
+        /^[\t ]*-[\t ]*["']?@sebbo2002\/semantic-release-jsr["']?[\t ]*\n?/gmu,
+        "",
+      );
       await fs.writeFile(releasercPath, updatedReleaserc, "utf8");
     } catch {
       // ignore
