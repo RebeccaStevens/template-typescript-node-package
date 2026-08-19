@@ -502,22 +502,23 @@ try {
     }
   }
 
-  // Remove JSR configuration if user opts out
-  if (!includeJsr) {
-    try {
-      await fs.unlink(path.resolve("jsr.json"));
-    } catch {
-      // ignore
-    }
+  // Handle JSR configuration
+  if (includeJsr) {
+    // Add JSR configuration if user opted in
     const releasercPath = path.resolve(".releaserc.yml");
     try {
       const rawReleaserc = await fs.readFile(releasercPath, "utf8");
-
-      const updatedReleaserc = rawReleaserc.replaceAll(
-        /^[\t ]*-[\t ]*["']?@sebbo2002\/semantic-release-jsr["']?[\t ]*\n?/gmu,
-        "",
+      const updatedReleaserc = rawReleaserc.replace(
+        '  - "@semantic-release/npm"',
+        '  - "@semantic-release/npm"\n  - "@sebbo2002/semantic-release-jsr"',
       );
       await fs.writeFile(releasercPath, updatedReleaserc, "utf8");
+    } catch {
+      // ignore
+    }
+  } else {
+    try {
+      await fs.unlink(path.resolve("jsr.json"));
     } catch {
       // ignore
     }
