@@ -2,14 +2,8 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "module": "preserve",
-    "moduleResolution": "bundler",
-    "allowJs": false,
-    "declaration": false,
-    "noEmit": false,
-    "outDir": ".",
-    "rootDir": ".",
-    "tsBuildInfoFile": null
+    "target": "es2022",
+    "noEmit": false
   },
-  "include": ["*.ts"],
-  "exclude": []
+  "include": ["*.ts"]
 }

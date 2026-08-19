@@ -25,13 +25,13 @@
 To create and initialize a new package using `npx`:
 
 ```sh
-npx --allow-git=all github:RebeccaStevens/template-typescript-node-package my-new-package
+npx @rebeccastevens/create-ts-pkg my-new-package
 ```
 
 For advanced configuration (license selection, test suite, JSR, Renovate, and Commitizen toggles) via `npx`:
 
 ```sh
-npx --allow-git=all github:RebeccaStevens/template-typescript-node-package my-new-package --advanced
+npx @rebeccastevens/create-ts-pkg my-new-package --advanced
 ```
 
 Or run directly inside a cloned repository:
@@ -99,3 +99,14 @@ bunx jsr add package_name
 ```
 
 <!-- template-jsr-install-end -->
+<!-- template-publishing-start -->
+
+## Publishing (Post-Initialization)
+
+When you are ready to publish your package:
+
+1. Update `package.json` to set `"private": false`.
+2. Configure **npm Trusted Publishing** (OIDC) at [npmjs.com](https://www.npmjs.com) to allow GitHub Actions to publish securely without an `NPM_TOKEN`.
+3. If your repository is private, add a `CODECOV_TOKEN` repository secret for the coverage step to succeed.
+
+<!-- template-publishing-end -->

@@ -12,6 +12,7 @@ type GitRemoteInfo = Readonly<{
 
 type PackageJson = Readonly<{
   name?: string | undefined;
+  private?: boolean | undefined;
   description?: string | undefined;
   license?: string | undefined;
   author?: Readonly<{ name: string; email: string }> | undefined;
@@ -168,13 +169,45 @@ async function promptBoolean(question: string, defaultYes: boolean): Promise<boo
 function getLicenseText(licenseType: string, year: number, authorName: string): string | null {
   const norm = licenseType.trim().toUpperCase();
   if (norm === "MIT") {
-    return `MIT License\n\nCopyright (c) ${year} ${authorName}\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n`;
+    return `MIT License\n\nCopyright (c) ${year} ${authorName}\n\nPermission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n`;
   }
   if (norm === "BSD-3-CLAUSE" || norm === "BSD") {
-    return `BSD 3-Clause License\n\nCopyright (c) ${year}, ${authorName}\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n\n3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n`;
+    return `BSD 3-Clause License\n\nCopyright (c) ${year}, ${authorName}\nAll rights reserved.\n\nRedistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:\n\n1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.\n\n2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.\n\n3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.\n\nTHIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n`;
   }
   if (norm === "APACHE-2.0" || norm === "APACHE") {
     return `Apache License\nVersion 2.0, January 2004\nhttp://www.apache.org/licenses/\n\nCopyright ${year} ${authorName}\n\nLicensed under the Apache License, Version 2.0 (the "License");\nyou may not use this file except in compliance with the License.\nYou may obtain a copy of the License at\n\n    http://www.apache.org/licenses/LICENSE-2.0\n\nUnless required by applicable law or agreed to in writing, software\ndistributed under the License is distributed on an "AS IS" BASIS,\nWITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\nSee the License for the specific language governing permissions and\nlimitations under the License.\n`;
+  }
+  return null;
+}
+
+/**
+ * Returns license badge metadata for supported license types.
+ *
+ * @param licenseType - Chosen license name.
+ * @returns Badge text and license URL, or null if UNLICENSED.
+ */
+function getLicenseBadgeInfo(licenseType: string): Readonly<{
+  badgeText: string;
+  licenseUrl: string;
+}> | null {
+  const norm = licenseType.trim().toUpperCase();
+  if (norm === "MIT") {
+    return {
+      badgeText: "MIT license",
+      licenseUrl: "https://opensource.org/licenses/MIT",
+    };
+  }
+  if (norm === "BSD-3-CLAUSE" || norm === "BSD") {
+    return {
+      badgeText: "BSD 3 Clause license",
+      licenseUrl: "https://opensource.org/licenses/BSD-3-Clause",
+    };
+  }
+  if (norm === "APACHE-2.0" || norm === "APACHE") {
+    return {
+      badgeText: "Apache 2.0 license",
+      licenseUrl: "https://opensource.org/licenses/Apache-2.0",
+    };
   }
   return null;
 }
@@ -205,6 +238,9 @@ function isUserRebeccaStevens(
  * @param includeJsr - Whether JSR configuration is enabled.
  * @param isRebecca - Whether author is Rebecca Stevens.
  * @param includeTidelift - Whether Tidelift funding is included.
+ * @param licenseType - The chosen license type.
+ * @param includeTests - Whether test suite is included.
+ * @param includeCommitizen - Whether Commitizen is included.
  */
 async function updateReadme(
   filePath: string,
@@ -212,6 +248,9 @@ async function updateReadme(
   includeJsr: boolean,
   isRebecca: boolean,
   includeTidelift: boolean,
+  licenseType: string,
+  includeTests: boolean,
+  includeCommitizen: boolean,
 ): Promise<void> {
   try {
     const raw = await fs.readFile(filePath, "utf8");
@@ -225,7 +264,30 @@ async function updateReadme(
         : removeBlock(withoutJsr, "template-tidelift")
       : removeBlock(withoutJsr, "template-donations");
     const replaced = replacePlaceholders(withoutDonationsOrTidelift, context);
-    const finalContent = stripRemainingCommentMarkers(replaced);
+
+    // Update license badge
+    const licenseInfo = getLicenseBadgeInfo(licenseType);
+    const withLicenseBadge =
+      licenseInfo === null
+        ? // eslint-disable-next-line optimize-regex/optimize-regex
+          replaced.replaceAll(/\[!\[BSD 3 Clause license\].*?\]\(.*?\)\\?\n?/gu, "")
+        : replaced
+            .replaceAll("BSD 3 Clause license", licenseInfo.badgeText)
+            .replaceAll("https://opensource.org/licenses/BSD-3-Clause", licenseInfo.licenseUrl);
+
+    // Remove Codecov badge when tests are disabled
+    const withoutCovBadge = includeTests
+      ? withLicenseBadge
+      : // eslint-disable-next-line optimize-regex/optimize-regex
+        withLicenseBadge.replaceAll(/\[!\[Coverage Status\].*?\]\(.*?\)\\?\n?/gu, "");
+
+    // Remove Commitizen badge when Commitizen is disabled
+    const withoutCzBadge = includeCommitizen
+      ? withoutCovBadge
+      : // eslint-disable-next-line optimize-regex/optimize-regex
+        withoutCovBadge.replaceAll(/\[!\[Commitizen friendly\].*?\]\(.*?\)\\?\n?/gu, "");
+
+    const finalContent = stripRemainingCommentMarkers(withoutCzBadge);
 
     await fs.writeFile(filePath, finalContent, "utf8");
   } catch {
@@ -244,8 +306,12 @@ async function updateDonations(filePath: string, context: TemplateContext, inclu
   try {
     const raw = await fs.readFile(filePath, "utf8");
     const filtered = includeTidelift ? raw : removeBlock(raw, "template-tidelift");
-    const replaced = replacePlaceholders(filtered, context);
-    const finalContent = stripRemainingCommentMarkers(replaced);
+    // Preserve the literal RebeccaStevens/RebeccaStevens path used in crypto asset URLs
+    const assetPlaceholder = "%%ASSET_OWNER_PATH%%";
+    const protectedText = filtered.replaceAll("RebeccaStevens/RebeccaStevens", assetPlaceholder);
+    const replaced = replacePlaceholders(protectedText, context);
+    const restored = replaced.replaceAll(assetPlaceholder, "RebeccaStevens/RebeccaStevens");
+    const finalContent = stripRemainingCommentMarkers(restored);
 
     await fs.writeFile(filePath, finalContent, "utf8");
   } catch {
@@ -281,35 +347,38 @@ try {
   const positionalArg = process.argv.slice(2).find((arg) => !arg.startsWith("-"));
   const targetArg = positionalArg;
 
-  if (targetArg !== undefined && targetArg.trim() !== "") {
-    const targetPath = path.resolve(targetArg.trim());
-    const sourcePath = path.resolve(import.meta.dirname, "..");
+  const targetPath =
+    targetArg !== undefined && targetArg.trim() !== "" ? path.resolve(targetArg.trim()) : process.cwd();
+  const sourcePath = path.resolve(import.meta.dirname, "..");
 
-    if (targetPath !== sourcePath) {
+  if (targetPath !== sourcePath) {
+    if (targetArg !== undefined && targetArg.trim() !== "") {
       console.log(`📁 Target directory specified: ${targetArg.trim()}\n`);
       await fs.mkdir(targetPath, { recursive: true });
+    }
 
-      await fs.cp(sourcePath, targetPath, {
-        recursive: true,
-        filter: (src) => {
-          const relative = path.relative(sourcePath, src);
-          return (
-            !relative.startsWith("node_modules") &&
-            !relative.startsWith("dist") &&
-            !relative.startsWith("coverage") &&
-            !relative.startsWith(".git/") &&
-            relative !== ".git"
-          );
-        },
-      });
+    await fs.cp(sourcePath, targetPath, {
+      recursive: true,
+      filter: (src) => {
+        const relative = path.relative(sourcePath, src);
+        return (
+          !relative.startsWith("node_modules") &&
+          !relative.startsWith("dist") &&
+          !relative.startsWith("coverage") &&
+          !relative.startsWith(".wireit/") &&
+          !relative.startsWith(".git/") &&
+          relative !== ".git" &&
+          relative !== ".wireit"
+        );
+      },
+    });
 
-      process.chdir(targetPath);
+    process.chdir(targetPath);
 
-      try {
-        execSync("git init", { stdio: "ignore" });
-      } catch {
-        // ignore if git is not available
-      }
+    try {
+      execSync("git init", { stdio: "ignore" });
+    } catch {
+      // ignore if git is not available
     }
   }
 
@@ -358,6 +427,8 @@ try {
     ? await promptBoolean("Include Commitizen & Conventional Commits setup", true)
     : true;
 
+  const isPrivate = isAdvanced ? await promptBoolean("Set package as private", true) : true;
+
   // Update LICENSE file
   const licensePath = path.resolve("LICENSE");
   const licenseText = getLicenseText(licenseType, new Date().getFullYear(), authorName);
@@ -401,6 +472,27 @@ try {
     } catch {
       // ignore
     }
+    // Remove codecov config when tests are disabled
+    try {
+      await fs.unlink(path.resolve(".github/codecov.yml"));
+    } catch {
+      // ignore
+    }
+    // Remove vitest debug config from launch.json
+    try {
+      const launchPath = path.resolve(".vscode/launch.json");
+      const launchRaw = await fs.readFile(launchPath, "utf8");
+      const launch = JSON.parse(launchRaw) as Readonly<{ configurations?: ReadonlyArray<Readonly<{ name?: string }>> }>;
+      const newConfigurations = Array.isArray(launch.configurations)
+        ? launch.configurations.filter(
+            (c: any) => typeof c?.name !== "string" || c.name.toLowerCase().includes("test") === false,
+          )
+        : launch.configurations;
+      const newLaunch = { ...launch, configurations: newConfigurations };
+      await fs.writeFile(launchPath, `${JSON.stringify(newLaunch, null, 2)}\n`, "utf8");
+    } catch {
+      // ignore
+    }
   }
 
   // Remove JSR configuration if user opts out
@@ -441,6 +533,12 @@ try {
     } catch {
       // ignore
     }
+    // Remove the husky commit-msg hook that depends on commitlint
+    try {
+      await fs.unlink(path.resolve(".husky/commit-msg"));
+    } catch {
+      // ignore
+    }
   }
 
   // Update package.json immutably
@@ -448,7 +546,7 @@ try {
   const pkgContent = await fs.readFile(pkgPath, "utf8");
   const pkg = JSON.parse(pkgContent) as PackageJson;
 
-  const { init: _initScript, cz: _czScript, ...remainingScripts } = pkg.scripts;
+  const { init: _initScript, cz: _czScript, prepublishOnly: _prepublish, ...remainingScripts } = pkg.scripts;
   const { bin: _bin, funding: _funding, ...pkgWithoutBinAndFunding } = pkg;
 
   const initialScripts: Record<string, string> = {
@@ -479,7 +577,7 @@ try {
           ),
         );
 
-  const finalFiles = !includeJsr && pkg.files !== undefined ? pkg.files.filter((f) => f !== "jsr.json") : pkg.files;
+  const finalFiles = ["dist/", "src/"];
 
   const updatedFunding = isRebecca
     ? pkg.funding
@@ -487,13 +585,17 @@ try {
         .map((f) =>
           f["url"] === undefined
             ? f
-            : { ...f, url: f["url"].replaceAll("package_name", name).replaceAll("RebeccaStevens", repoOwner) },
+            : {
+                ...f,
+                url: f["url"].replaceAll("package_name", name).replaceAll("RebeccaStevens", repoOwner),
+              },
         )
     : undefined;
 
   const updatedPkg: PackageJson = {
     ...pkgWithoutBinAndFunding,
     name,
+    private: isPrivate,
     description,
     license: licenseType.trim(),
     author: { name: authorName, email: authorEmail },
@@ -514,9 +616,13 @@ try {
     try {
       const jsrContent = await fs.readFile(jsrPath, "utf8");
       const jsr = JSON.parse(jsrContent) as JsrJson;
+      const publish = jsr["publish"] as { include?: string[] } | undefined;
       const updatedJsr: JsrJson = {
         ...jsr,
         name: name.startsWith("@") ? name : `@${repoOwner}/${name}`,
+        ...(licenseText === null && publish?.include !== undefined
+          ? { publish: { ...publish, include: publish.include.filter((f) => f !== "LICENSE") } }
+          : {}),
       };
       await fs.writeFile(jsrPath, `${JSON.stringify(updatedJsr, null, 2)}\n`, "utf8");
     } catch {
@@ -525,7 +631,16 @@ try {
   }
 
   // Update text files
-  await updateReadme(path.resolve("README.md"), context, includeJsr, isRebecca, includeTidelift);
+  await updateReadme(
+    path.resolve("README.md"),
+    context,
+    includeJsr,
+    isRebecca,
+    includeTidelift,
+    licenseType,
+    includeTests,
+    includeCommitizen,
+  );
 
   if (isRebecca) {
     await updateDonations(path.resolve("DONATIONS.md"), context, includeTidelift);
@@ -551,20 +666,43 @@ try {
     }
   }
 
-  // Self-cleanup: remove scripts/init.ts and remove scripts directory if empty
-  const initScriptPath = path.resolve("scripts/init.ts");
+  // Self-cleanup: remove scripts directory
   try {
-    await fs.unlink(initScriptPath);
     const scriptsDir = path.resolve("scripts");
-    const remainingFiles = await fs.readdir(scriptsDir);
-    if (remainingFiles.length === 0) {
-      await fs.rmdir(scriptsDir);
-    }
+    await fs.rm(scriptsDir, { recursive: true, force: true });
   } catch {
     // ignore cleanup errors
   }
 
+  // Remove dead ESLint ignore for scripts/init.js
+  try {
+    const eslintConfigPath = path.resolve("eslint.config.js");
+    const eslintRaw = await fs.readFile(eslintConfigPath, "utf8");
+    // eslint-disable-next-line optimize-regex/optimize-regex
+    const updated = eslintRaw.replaceAll(/\s*ignores:\s*\["scripts\/init\.js"\],?\n?/gu, "\n");
+    await fs.writeFile(eslintConfigPath, updated, "utf8");
+  } catch {
+    // ignore
+  }
+
   console.log("\n✅ Template initialized successfully!\n");
+  console.log("📦 Installing dependencies and formatting files...\n");
+
+  try {
+    execSync("pnpm install --ignore-scripts", { stdio: "inherit" });
+    execSync("pnpm run lint-fix", { stdio: "ignore" });
+  } catch {
+    console.error(
+      "⚠️  Failed to install dependencies or format files. You may need to run `pnpm install` and `pnpm run lint-fix` manually.",
+    );
+  }
+
+  try {
+    execSync("git add .", { stdio: "ignore" });
+    execSync('git commit -m "chore: initial commit"', { stdio: "ignore" });
+  } catch {
+    // ignore
+  }
 } finally {
   rl.close();
 }

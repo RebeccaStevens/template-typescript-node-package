@@ -1,5 +1,5 @@
 {
-  "name": "package_name",
+  "name": "@rebeccastevens/create-ts-pkg",
   "version": "0.0.0-development",
   "exports": "./src/index.ts",
   "publish": {
