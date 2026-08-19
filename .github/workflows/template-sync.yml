@@ -27,6 +27,7 @@ jobs:
           pr_commit_msg: "chore(template): sync updates from upstream template"
           pr_branch_name_prefix: "template-sync"
           ignore_paths: |
+            scripts/**
             src/**
             !src/tsconfig.json
             !src/tsconfig.build.json

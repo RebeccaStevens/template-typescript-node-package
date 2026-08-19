@@ -455,6 +455,7 @@ try {
   if (!includeTests) {
     try {
       await fs.rm(path.resolve("tests"), { recursive: true, force: true });
+      await ignoreSyncPath("tests/**");
     } catch {
       // ignore
     }
