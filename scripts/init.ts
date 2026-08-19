@@ -39,7 +39,6 @@ type TemplateContext = Readonly<{
 
 const TEST_DEV_DEP_PATTERNS = [/^vitest$/u, /^@vitest\//u, /^eslint-plugin-no-only-tests$/u];
 const COMMITIZEN_DEV_DEP_PATTERNS = [/^@commitlint\//u, /^commitizen$/u, /^cz-/u];
-const TEST_SCRIPT_KEYS = new Set(["test", "test:js", "test:js-run", "test:js-watch", "test:coverage"]);
 
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
 
@@ -493,14 +492,9 @@ try {
     try {
       const launchPath = path.resolve(".vscode/launch.json");
       const launchRaw = await fs.readFile(launchPath, "utf8");
-      const launch = JSON.parse(launchRaw) as Readonly<{ configurations?: ReadonlyArray<Readonly<{ name?: string }>> }>;
-      const newConfigurations = Array.isArray(launch.configurations)
-        ? launch.configurations.filter(
-            (c: any) => typeof c?.name !== "string" || c.name.toLowerCase().includes("test") === false,
-          )
-        : launch.configurations;
-      const newLaunch = { ...launch, configurations: newConfigurations };
-      await fs.writeFile(launchPath, `${JSON.stringify(newLaunch, null, 2)}\n`, "utf8");
+      // eslint-disable-next-line optimize-regex/optimize-regex
+      const updatedLaunch = launchRaw.replace(/,\s*\{\s*"name":\s*"[^"]*test[^"]*"[\s\S]*?\}\s*(?=\])/iu, "");
+      await fs.writeFile(launchPath, updatedLaunch, "utf8");
     } catch {
       // ignore
     }
@@ -508,7 +502,8 @@ try {
     try {
       const eslintPath = path.resolve("eslint.config.js");
       const eslintRaw = await fs.readFile(eslintPath, "utf8");
-      const updatedEslint = eslintRaw.replace(/(\s*)(mode: "library",)/u, "$1test: false,$1$2");
+      // eslint-disable-next-line optimize-regex/optimize-regex
+      const updatedEslint = eslintRaw.replace(/(rsEslint\(\s*\{)/u, "$1\n  test: false,");
       await fs.writeFile(eslintPath, updatedEslint, "utf8");
     } catch {
       // ignore
@@ -522,8 +517,8 @@ try {
     try {
       const rawReleaserc = await fs.readFile(releasercPath, "utf8");
       const updatedReleaserc = rawReleaserc.replace(
-        '  - "@semantic-release/npm"',
-        '  - "@semantic-release/npm"\n  - "@sebbo2002/semantic-release-jsr"',
+        /^(\s*-\s*["']@semantic-release\/npm["']\s*)$/mu,
+        '$1\n  - "@sebbo2002/semantic-release-jsr"',
       );
       await fs.writeFile(releasercPath, updatedReleaserc, "utf8");
     } catch {
@@ -593,7 +588,7 @@ try {
 
   const finalScripts = includeTests
     ? filteredScripts
-    : Object.fromEntries(Object.entries(filteredScripts).filter(([key]) => !TEST_SCRIPT_KEYS.has(key)));
+    : Object.fromEntries(Object.entries(filteredScripts).filter(([key]) => !/^test(?::|$)/u.test(key)));
 
   const finalDevDependencies =
     pkg.devDependencies === undefined
