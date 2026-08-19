@@ -601,7 +601,7 @@ try {
           ),
         );
 
-  const finalFiles = ["dist/", "src/"];
+  const finalFiles = ["dist/"];
 
   const updatedFunding = isRebecca
     ? pkg.funding
