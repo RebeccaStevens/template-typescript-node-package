@@ -434,6 +434,7 @@ try {
   const includeCommitizen = isAdvanced
     ? await promptBoolean("Include Commitizen & Conventional Commits setup", true)
     : true;
+  const includeVSCode = isAdvanced ? await promptBoolean("Include VS Code configuration", true) : true;
 
   const isPrivate = isAdvanced ? await promptBoolean("Set package as private", true) : true;
 
@@ -565,6 +566,16 @@ try {
     }
   }
 
+  // Remove VS Code configuration if user opts out
+  if (!includeVSCode) {
+    try {
+      await fs.rm(path.resolve(".vscode"), { recursive: true, force: true });
+      await ignoreSyncPath(".vscode/**");
+    } catch {
+      // ignore
+    }
+  }
+
   // Update package.json immutably
   const pkgPath = path.resolve("package.json");
   const pkgContent = await fs.readFile(pkgPath, "utf8");
@@ -601,6 +612,8 @@ try {
           ),
         );
 
+  // Per the npm docs, only list what isn't already always included: package.json, README (and variants),
+  // LICENSE (and variants), the "main" file and the "bin" files are bundled regardless of the "files" field.
   const finalFiles = ["dist/"];
 
   const updatedFunding = isRebecca

@@ -28,7 +28,7 @@ To create and initialize a new package using `npx`:
 npx @rebeccastevens/create-ts-pkg my-new-package
 ```
 
-For advanced configuration (license selection, test suite, JSR, Renovate, and Commitizen toggles) via `npx`:
+For advanced configuration (license selection, test suite, JSR, Renovate, Commitizen, and VS Code configuration toggles) via `npx`:
 
 ```sh
 npx @rebeccastevens/create-ts-pkg my-new-package --advanced
