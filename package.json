@@ -43,7 +43,6 @@
     "create-ts-pkg": "./scripts/init.js"
   },
   "files": [
-    "dist/",
     "scripts/init.js",
     "src/",
     "tests/",
@@ -71,11 +70,7 @@
     ".gitignore",
     ".gitattributes",
     ".nvmrc",
-    ".editorconfig",
-    "package.json",
-    "CHANGELOG.md",
-    "LICENSE",
-    "README.md"
+    ".editorconfig"
   ],
   "scripts": {
     "build": "wireit",
@@ -114,7 +109,6 @@
       "files": [
         "src/**",
         "rollup.config.ts",
-        "package.json",
         "tsconfig.json",
         "src/tsconfig.json",
         "src/tsconfig.build.json"
