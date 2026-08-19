@@ -6,7 +6,7 @@ on:
   workflow_call:
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.job }}-${{ github.ref }}
+  group: ${{ github.workflow }}-lint-spelling-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
