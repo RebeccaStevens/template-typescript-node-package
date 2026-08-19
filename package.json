@@ -43,6 +43,7 @@
     "create-ts-pkg": "./scripts/init.js"
   },
   "files": [
+    "dist/",
     "scripts/init.js",
     "src/",
     "tests/",
