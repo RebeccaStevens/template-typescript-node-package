@@ -686,6 +686,13 @@ try {
     // ignore cleanup errors
   }
 
+  // Remove CHANGELOG.md to start fresh
+  try {
+    await fs.unlink(path.resolve("CHANGELOG.md"));
+  } catch {
+    // ignore
+  }
+
   // Remove dead ESLint ignore for scripts/init.js
   try {
     const eslintConfigPath = path.resolve("eslint.config.js");
