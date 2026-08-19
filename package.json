@@ -71,7 +71,8 @@
     ".gitignore",
     ".gitattributes",
     ".nvmrc",
-    ".editorconfig"
+    ".editorconfig",
+    ".templatesyncignore"
   ],
   "scripts": {
     "build": "wireit",

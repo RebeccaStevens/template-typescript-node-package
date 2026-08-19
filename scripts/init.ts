@@ -53,9 +53,9 @@ function normalize(str: string): string {
 }
 
 async function ignoreSyncPath(filePath: string): Promise<void> {
-  const syncWfPath = path.resolve(".github/workflows/template-sync.yml");
+  const syncIgnorePath = path.resolve(".templatesyncignore");
   try {
-    await fs.appendFile(syncWfPath, `            ${filePath}\n`, "utf8");
+    await fs.appendFile(syncIgnorePath, `${filePath}\n`, "utf8");
   } catch {
     // ignore
   }
