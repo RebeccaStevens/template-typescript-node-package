@@ -20,13 +20,13 @@ export default {
 
   output: [
     {
-      file: pkg.exports.import,
+      file: pkg.exports["."].import,
       format: "esm",
       sourcemap: false,
       importAttributesKey: "with",
     },
     {
-      file: pkg.exports.require,
+      file: pkg.exports["."].require,
       format: "cjs",
       sourcemap: false,
     },
