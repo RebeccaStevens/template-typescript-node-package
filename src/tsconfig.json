@@ -6,6 +6,7 @@
     "allowJs": false,
     "declaration": true,
     "isolatedDeclarations": true,
+    "erasableSyntaxOnly": true,
     "rootDir": "."
   },
   "include": [".", ".*"]
