@@ -1,0 +1,99 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/RebeccaStevens/template-typescript-node-package/main/scripts/init-config.schema.json",
+  "title": "Template Init Config",
+  "description": "Configuration for `init --config`: answers for scaffolding a new package from template-typescript-node-package.",
+  "type": "object",
+  "properties": {
+    "$schema": {
+      "title": "Schema",
+      "description": "The JSON schema URI for this config file.",
+      "type": "string",
+      "format": "uri"
+    },
+    "name": {
+      "title": "Package Name",
+      "description": "The npm package name.",
+      "type": "string",
+      "pattern": "^(@[a-z0-9-~][a-z0-9-._~]*\\/)?[a-z0-9-~][a-z0-9-._~]*$"
+    },
+    "description": {
+      "title": "Package Description",
+      "description": "A short description of the package.",
+      "type": "string",
+      "minLength": 1
+    },
+    "authorName": {
+      "title": "Author Name",
+      "description": "The name of the package author.",
+      "type": "string"
+    },
+    "authorEmail": {
+      "title": "Author Email",
+      "description": "The email address of the package author.",
+      "type": "string",
+      "format": "email"
+    },
+    "repoOwner": {
+      "title": "Repository Owner",
+      "description": "The GitHub account (user or organization) that owns the repository.",
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9](?:[a-zA-Z0-9.-]*[a-zA-Z0-9])?$"
+    },
+    "repoName": {
+      "title": "Repository Name",
+      "description": "The name of the GitHub repository.",
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9](?:[a-zA-Z0-9.-]*[a-zA-Z0-9])?$"
+    },
+    "licenseType": {
+      "title": "License Type",
+      "description": "The SPDX-style license identifier to apply to the package.",
+      "type": "string",
+      "enum": ["BSD-3-Clause", "MIT", "Apache-2.0", "UNLICENSED"]
+    },
+    "includeTidelift": {
+      "title": "Include Tidelift",
+      "description": "Whether to include Tidelift subscription references. Defaults to whether the author is Rebecca Stevens.",
+      "type": "boolean"
+    },
+    "includeTests": {
+      "title": "Include Tests",
+      "description": "Whether to scaffold the test suite.",
+      "type": "boolean",
+      "default": true
+    },
+    "includeJsr": {
+      "title": "Include JSR",
+      "description": "Whether to include JSR publishing configuration.",
+      "type": "boolean",
+      "default": true
+    },
+    "includeRenovate": {
+      "title": "Include Renovate",
+      "description": "Whether to include Renovate dependency automation.",
+      "type": "boolean",
+      "default": true
+    },
+    "includeCommitizen": {
+      "title": "Include Commitizen",
+      "description": "Whether to include Commitizen commit tooling.",
+      "type": "boolean",
+      "default": true
+    },
+    "includeVSCode": {
+      "title": "Include VS Code Config",
+      "description": "Whether to include .vscode workspace settings.",
+      "type": "boolean",
+      "default": true
+    },
+    "isPrivate": {
+      "title": "Private Package",
+      "description": "Whether the package is private (not published to npm).",
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "required": ["name", "description", "authorName", "authorEmail", "repoOwner", "repoName", "licenseType"],
+  "additionalProperties": false
+}

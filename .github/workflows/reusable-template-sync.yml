@@ -1,0 +1,118 @@
+name: Template Sync (Reusable)
+
+# Reusable template-sync workflow.
+#
+# sync-v1 tag contract:
+#   Consumers pin this workflow via the `sync-v1` tag. Platform updates propagate
+#   to consumers ONLY via a deliberate bump of that tag — never automatically.
+#
+# App-token rationale:
+#   PRs created with the default GITHUB_TOKEN do not trigger downstream CI
+#   (GitHub suppresses recursive workflow events). A GitHub App token is used
+#   instead so sync PRs run checks and are reviewable like any other PR.
+#   Requirement: vars.TEMPLATE_APP_ID / secrets.TEMPLATE_APP_KEY must be
+#   configured — without them the token step fails and the sync aborts.
+#   There is no GITHUB_TOKEN fallback.
+#
+# Manifest immutability rule:
+#   Consumer-owned files listed in `.templatesyncignore` are immutable during
+#   sync: after each upstream pull, the consumer's copy is always restored.
+#   Template baseline changes to those files distribute only via deliberate
+#   manual updates, never via sync PRs.
+
+on:
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      runs-on:
+        description: The type of machine to run the jobs on.
+        required: false
+        type: string
+        default: ubuntu-latest
+    outputs:
+      pr_number:
+        description: The number of the opened template-sync PR.
+        value: ${{ jobs.sync.outputs.pr_number }}
+      pr_branch:
+        description: The branch of the opened template-sync PR.
+        value: ${{ jobs.sync.outputs.pr_branch }}
+      template_git_hash:
+        description: The git hash of the synced upstream template commit.
+        value: ${{ jobs.sync.outputs.template_git_hash }}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync:
+    if: github.event_name == 'workflow_dispatch' || vars.TEMPLATE_SYNC_ENABLED == 'true'
+    runs-on: ${{ inputs.runs-on }}
+    outputs:
+      pr_number: ${{ steps.template_sync.outputs.pr_number }}
+      pr_branch: ${{ steps.template_sync.outputs.pr_branch }}
+      template_git_hash: ${{ steps.template_sync.outputs.template_git_hash }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          fetch-depth: 0
+      - uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        id: app-token
+        with:
+          app-id: ${{ vars.TEMPLATE_APP_ID }}
+          private-key: ${{ secrets.TEMPLATE_APP_KEY }}
+      - uses: AndreasAugustin/actions-template-sync@8a0f668b83c32a0f673353086d74f12b8853d4f5 # v2.5.3
+        id: template_sync
+        with:
+          source_repo_path: RebeccaStevens/template-typescript-node-package
+          upstream_branch: sync-v1
+          target_gh_token: ${{ steps.app-token.outputs.token }}
+          git_remote_pull_params: "--allow-unrelated-histories --squash --strategy=recursive -X theirs"
+          pr_branch_name_prefix: template-sync
+          pr_title: "chore(template): sync updates from upstream template"
+          pr_commit_msg: "chore(template): sync updates from upstream template"
+          pr_labels: template_sync
+          is_pr_cleanup: true
+          is_force_push_pr: false
+
+  lockfile:
+    needs: sync
+    if: >-
+      needs.sync.result == 'success'
+      && needs.sync.outputs.pr_branch != ''
+      && (github.event_name == 'workflow_dispatch' || vars.TEMPLATE_SYNC_ENABLED == 'true')
+    runs-on: ${{ inputs.runs-on }}
+    concurrency:
+      group: template-lockfile-${{ github.event.pull_request.head.ref || needs.sync.outputs.pr_branch }}
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          ref: ${{ needs.sync.outputs.pr_branch }}
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7
+        with:
+          node-version: 24
+      - run: corepack enable pnpm
+      - run: pnpm install --no-frozen-lockfile
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      - run: 'git diff --quiet -- pnpm-lock.yaml || git commit --signoff --no-verify -m "chore(template): regenerate lockfile" pnpm-lock.yaml'
+      - name: Push lockfile (one retry)
+        env:
+          branch: ${{ needs.sync.outputs.pr_branch }}
+        run: |
+          if git push origin "HEAD:$branch"; then
+            exit 0
+          fi
+          git pull --rebase origin "$branch"
+          if git push origin "HEAD:$branch"; then
+            exit 0
+          fi
+          echo "::warning::Failed to push regenerated lockfile to '$branch' after one rebase retry"
+          exit 1

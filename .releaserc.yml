@@ -53,7 +53,9 @@ plugins:
   - - "@semantic-release/git"
     - assets:
         - CHANGELOG.md
-  - "@semantic-release/npm"
+  - - "@semantic-release/npm"
+    - provenance: true
+  - "@sebbo2002/semantic-release-jsr"
   - - "@semantic-release/github"
     - releasedLabels:
         - "Status: Released"

@@ -4,7 +4,6 @@ src/**
 !src/tsconfig.build.json
 !src/tsconfig*.json
 tests/**
-!tests/tsconfig.json
 !tests/tsconfig*.json
 CHANGELOG.md
 jsr.json
@@ -22,3 +21,5 @@ yarn.lock
 bun.lock
 bun.lockb
 .templatesyncignore
+CALIBRATION.md
+AGENTS.md
