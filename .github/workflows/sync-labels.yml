@@ -8,6 +8,10 @@ on:
       - .github/labels.yml
   workflow_dispatch:
 
+concurrency:
+  group: ${{ github.workflow }}-sync-labels-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
   issues: write
   pull-requests: write
