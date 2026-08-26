@@ -94,7 +94,7 @@
     "lint-fix": "eslint --fix && pnpm run lint:md-fix && pnpm run lint:packages-fix",
     "prepare": "husky",
     "prepublishOnly": "tsc -p scripts/tsconfig.json",
-    "release": "pnpm dlx --package semantic-release --package @sebbo2002/semantic-release-jsr --package @semantic-release/changelog --package @semantic-release/commit-analyzer --package @semantic-release/git --package @semantic-release/github --package @semantic-release/npm --package @semantic-release/release-notes-generator --package semantic-release-publint semantic-release",
+    "release": "npx --package semantic-release@25.0.9 --package @semantic-release/changelog@7.0.0 --package @semantic-release/git@11.0.1 --package @semantic-release/github@12.0.9 --package @semantic-release/npm@13.1.5 --package @semantic-release/release-notes-generator@14.1.1 --package semantic-release-publint@1.0.7 --package @sebbo2002/semantic-release-jsr@4.0.2 semantic-release",
     "test": "pnpm run test:js",
     "test:js": "vitest --coverage",
     "test:js-run": "vitest run --coverage",
