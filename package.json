@@ -169,7 +169,7 @@
     "rollup-plugin-dts-bundle-generator-2": "2.0.0",
     "sort-package-json": "4.0.0",
     "tsc-files": "1.1.4",
-    "typescript": "6.0.3",
+    "typescript": "7.0.2",
     "vitest": "4.1.10",
     "wireit": "0.14.13",
     "yaml-eslint-parser": "2.1.0"
