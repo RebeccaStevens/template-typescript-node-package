@@ -131,7 +131,7 @@
     "@types/node": "24.1.0",
     "@typescript-eslint/eslint-plugin": "8.67.0",
     "@typescript-eslint/parser": "8.67.0",
-    "@vitest/coverage-v8": "4.1.10",
+    "@vitest/coverage-v8": "4.1.11",
     "@vitest/eslint-plugin": "1.6.27",
     "commitizen": "4.3.2",
     "cspell": "10.0.1",
@@ -170,7 +170,7 @@
     "sort-package-json": "4.0.0",
     "tsc-files": "1.1.4",
     "typescript": "6.0.3",
-    "vitest": "4.1.10",
+    "vitest": "4.1.11",
     "wireit": "0.14.13",
     "yaml-eslint-parser": "2.1.0"
   },
