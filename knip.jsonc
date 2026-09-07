@@ -13,4 +13,5 @@
     "semantic-release-publint",
   ],
   "exclude": ["exports", "nsExports", "types", "nsTypes"],
+  "ignoreFiles": ["coverage/**"],
 }

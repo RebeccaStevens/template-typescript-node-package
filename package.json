@@ -64,7 +64,7 @@
     "jsr.json",
     "knip.jsonc",
     "project-dictionary.txt",
-    "rollup.config.ts",
+    "tsdown.config.ts",
     "SECURITY.md",
     "src/",
     "tests/",
@@ -73,7 +73,7 @@
   ],
   "scripts": {
     "build": "wireit",
-    "build:force": "rimraf dist && rollup -c rollup.config.ts --configPlugin @rollup/plugin-typescript --configImportAttributesKey with",
+    "build:force": "tsdown",
     "cz": "git-cz",
     "init": "node scripts/init.js",
     "lint": "eslint && pnpm run lint:md && pnpm run lint:spelling && pnpm run lint:knip && pnpm run lint:package && pnpm run lint:attw && pnpm run lint:packages",
@@ -94,7 +94,7 @@
     "lint-fix": "eslint --fix && pnpm run lint:md-fix && pnpm run lint:packages-fix",
     "prepare": "husky",
     "prepublishOnly": "tsc -p scripts/tsconfig.json",
-    "release": "npx --package semantic-release@25.0.9 --package @semantic-release/changelog@7.0.0 --package @semantic-release/git@11.0.1 --package @semantic-release/github@12.0.9 --package @semantic-release/npm@13.1.5 --package @semantic-release/release-notes-generator@14.1.1 --package semantic-release-publint@1.0.7 --package @sebbo2002/semantic-release-jsr@4.0.2 semantic-release",
+    "release": "pnpm exec semantic-release",
     "test": "pnpm run test:js",
     "test:js": "vitest --coverage",
     "test:js-run": "vitest run --coverage",
@@ -107,7 +107,7 @@
       "command": "pnpm run build:force",
       "files": [
         "src/**",
-        "rollup.config.ts",
+        "tsdown.config.ts",
         "tsconfig.json",
         "src/tsconfig.json",
         "src/tsconfig.build.json"
@@ -125,8 +125,7 @@
     "@eslint-community/eslint-plugin-eslint-comments": "4.7.2",
     "@eslint/compat": "2.1.0",
     "@eslint/markdown": "8.0.3",
-    "@rebeccastevens/eslint-config": "3.9.7",
-    "@rollup/plugin-typescript": "12.3.0",
+    "@rebeccastevens/eslint-config": "4.0.2",
     "@stylistic/eslint-plugin": "5.10.0",
     "@types/node": "24.1.0",
     "@typescript-eslint/eslint-plugin": "8.67.0",
@@ -164,17 +163,15 @@
     "prettier": "3.9.6",
     "publint": "0.3.23",
     "rimraf": "6.1.3",
-    "rollup": "4.62.4",
-    "rollup-plugin-deassert": "1.3.0",
-    "rollup-plugin-dts-bundle-generator-2": "2.0.0",
     "sort-package-json": "4.0.0",
     "tsc-files": "1.1.4",
+    "tsdown": "0.23.0",
     "typescript": "6.0.3",
     "vitest": "4.1.10",
     "wireit": "0.14.13",
     "yaml-eslint-parser": "2.1.0"
   },
-  "packageManager": "pnpm@11.18.0",
+  "packageManager": "pnpm@12.3.4",
   "engines": {
     "node": ">=24.0.0"
   }
