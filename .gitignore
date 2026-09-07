@@ -6,3 +6,6 @@ node_modules/
 /.wireit/
 
 *.log
+
+# Agent documentation (negate global ~/.gitignore exclusions)
+!AGENTS.md

@@ -14,6 +14,10 @@ on:
       - edited
       - opened
 
+concurrency:
+  group: ${{ github.workflow }}-accessibility-alt-text-bot-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
   issues: write
   pull-requests: write

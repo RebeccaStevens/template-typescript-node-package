@@ -5,6 +5,10 @@ on:
     types:
       - closed
 
+concurrency:
+  group: ${{ github.workflow }}-done-label-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
   issues: write
   pull-requests: write

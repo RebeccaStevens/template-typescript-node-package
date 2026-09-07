@@ -9,6 +9,9 @@ concurrency:
   group: ${{ github.workflow }}-lint-markdown-${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+
 jobs:
   lint_markdown:
     runs-on: ubuntu-latest
