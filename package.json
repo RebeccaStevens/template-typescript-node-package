@@ -63,7 +63,7 @@
     "jsr.json",
     "knip.jsonc",
     "project-dictionary.txt",
-    "rollup.config.ts",
+    "tsdown.config.ts",
     "scripts/init-config.schema.json",
     "SECURITY.md",
     "src/",
@@ -73,7 +73,7 @@
   ],
   "scripts": {
     "build": "wireit",
-    "build:force": "rimraf dist && rollup -c rollup.config.ts --configPlugin @rollup/plugin-typescript --configImportAttributesKey with",
+    "build:force": "tsdown",
     "build:init": "tsc -p scripts/tsconfig.json",
     "cz": "git-cz",
     "init": "pnpm run build:init && node scripts/init.js",
@@ -108,7 +108,7 @@
       "command": "pnpm run build:force",
       "files": [
         "src/**",
-        "rollup.config.ts",
+        "tsdown.config.ts",
         "tsconfig.json",
         "src/tsconfig.json",
         "src/tsconfig.build.json",
@@ -128,7 +128,6 @@
     "@eslint/compat": "2.1.0",
     "@eslint/markdown": "8.0.3",
     "@rebeccastevens/eslint-config": "4.0.2",
-    "@rollup/plugin-typescript": "12.3.0",
     "@stylistic/eslint-plugin": "5.10.0",
     "@types/node": "24.1.0",
     "@typescript-eslint/eslint-plugin": "8.67.0",
@@ -171,17 +170,15 @@
     "prettier": "3.9.6",
     "publint": "0.3.23",
     "rimraf": "6.1.3",
-    "rollup": "4.62.4",
-    "rollup-plugin-deassert": "1.3.0",
-    "rollup-plugin-dts-bundle-generator-2": "2.0.0",
     "sort-package-json": "4.0.0",
     "tsc-files": "1.1.4",
+    "tsdown": "^0.23.0",
     "typescript": "6.0.3",
     "vitest": "4.1.10",
     "wireit": "0.14.13",
     "yaml-eslint-parser": "2.1.0"
   },
-  "packageManager": "pnpm@11.21.0",
+  "packageManager": "pnpm@12.3.4",
   "engines": {
     "node": ">=24.0.0"
   }

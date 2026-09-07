@@ -8,14 +8,14 @@ Rebecca Stevens' TypeScript Node packages.
 - `src/` — package source code (entry point: `src/index.ts`).
 - `tests/` — test suite run with vitest.
 - `.github/workflows/` — CI workflows (build, lint, test, typecheck, release).
-- `rollup.config.ts` — bundler configuration producing dual ESM/CJS builds with bundled types.
+- `tsdown.config.ts` — tsdown configuration producing dual ESM/CJS builds with bundled types.
 - Builds are orchestrated by wireit (`pnpm build`), with incremental state cached in `.wireit/`.
 
 ## Commands
 
 | Command              | Purpose                                                       |
 | -------------------- | ------------------------------------------------------------- |
-| `pnpm build`         | Build `dist/` via wireit and rollup.                          |
+| `pnpm build`         | Build `dist/` via wireit and tsdown.                          |
 | `pnpm test`          | Run the vitest suite with coverage.                           |
 | `pnpm run typecheck` | Typecheck the root and src projects.                          |
 | `pnpm run lint`      | Aggregate lint gate (see sub-lints below).                    |

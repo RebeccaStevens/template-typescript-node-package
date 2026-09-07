@@ -16,11 +16,11 @@
 | Delta | Classification | Evidence / Notes |
 | --- | --- | --- |
 | exports map uses `.mjs`/`.d.mts` (dm) vs `.js`/`.d.ts` (tpl) | REPO-SPECIFIC | dm publish surface; tpl dual `.cjs`/`.js` naming is its own convention |
-| `build` = wireit (tpl) vs direct `rimraf && rollup` (dm); tpl adds `build:force` | PENDING → ruling 1 (wireit-vs-direct) | see Recommendations |
+| `build` = wireit (tpl) vs direct `tsdown` (dm); tpl adds `build:force` | PENDING → ruling 1 (wireit-vs-direct) | see Recommendations |
 | `lint:attw` script + `@arethetypeswrong/cli` dep (tpl only) | PENDING → ruling 2 (attw placement) | eslint-plugin-functional already ships `lint:attw` + `lint-attw.yml` |
 | `benchmark`, `benchmark:types`, `benchmark:types:baseline`, `build:check`, `test:types` (tsd), `typecheck:consumer-ts7` scripts (dm only) | REPO-SPECIFIC | benchmark harness + tsd type-tests + TS7 consumer probe are dm features (tsd also used by uom-types/transpose-array, so *adoption elsewhere* is possible, but the scripts reference dm-only `scripts/*.ts`) |
 | `init`, `prepublishOnly` scripts + `bin` (tpl only) | TEMPLATE-SPECIFIC (n/a) | scaffolding entry points; not a consumer delta |
-| Dep drift, tpl newer: `@commitlint/*` 21.2.2, `knip` 6.32.2, `lint-staged` 17.3.0, `publint` 0.3.23, `rollup` 4.62.4, `eslint` 10.8.1 | PROPAGATE (to dm) | routine sync; consumers pin independently (is-immutable-type/uom-types/ts-declaration-location all on older lines) — aligning forward is repo-agnostic |
+| Dep drift, tpl newer: `@commitlint/*` 21.2.2, `knip` 6.32.2, `lint-staged` 17.3.0, `publint` 0.3.23, `tsdown` (replacing `rollup` 4.62.4), `eslint` 10.8.1 | PROPAGATE (to dm) | routine sync; consumers pin independently (is-immutable-type/uom-types/ts-declaration-location all on older lines) — aligning forward is repo-agnostic |
 | Dep drift, dm newer: `@rebeccastevens/eslint-config` 4.0.2, `eslint-plugin-jsdoc` 64.2.1, `eslint-plugin-unicorn` 73.0.0, `@types/node` 22→(tpl 24), `packageManager` pnpm@11.21.0 | PROPAGATE (into template) | eslint-plugin-functional already on unicorn 73.0.0 + jsdoc 64.2.1 — proves fleet compatibility of the newer majors |
 | `engines.node`: tpl `>=24.0.0` vs dm `>=16.9.0` | REPO-SPECIFIC | dm publishes with a wide runtime-support floor; template targets the dev-platform floor. Consumers vary (uom-types >=18, epf >=20, several none) — per-repo policy |
 | `files` array: tpl ships config/tooling files, dm ships `dist/` + metadata only | REPO-SPECIFIC | each repo's publish surface; template intentionally vendors its own config |
@@ -28,9 +28,9 @@
 | dm-only deps: `eslint-plugin-command`, `eslint-plugin-pnpm`, `eslint-plugin-security`, `eslint-plugin-unused-imports` | PROPAGATE (candidate, into template) | eslint-plugin-functional carries all four — repo-agnostic lint coverage; adoption order left to maintainer |
 | `typescript`: tpl plain `6.0.3` vs dm `npm:@typescript/typescript6@6.0.2` + `@typescript/native: npm:typescript@7.0.2` | EXPERIMENTAL (alias+native part) / PENDING → ruling 3 (policy) | see Recommendations |
 
-## rollup.config.ts
+## tsdown.config.ts
 
-NO DELTA — byte-identical (incl. `src/tsconfig.build.json`, also identical).
+MIGRATED — `rollup.config.ts` + `@rollup/plugin-typescript` + `rollup-plugin-dts-bundle-generator-2` replaced by `tsdown` (Rolldown-based). `tsdown.config.ts` uses `dts.cjsReexport: true` for single-build dual `.d.ts`/`.d.cts` generation. `src/tsconfig.build.json` now inherits `declaration: true` and `isolatedDeclarations: true` from `src/tsconfig.json` (removed overrides).
 
 ## vitest.config.ts
 
@@ -106,11 +106,8 @@ NO DELTA — `.husky/pre-commit`, `.husky/commit-msg`, `.lintstagedrc.yml`, `.co
 
 ## Pending Calibration Decisions — Recommended Rulings
 
-## 1. Build orchestration: wireit vs direct rollup
-
-**Ruling: keep wireit as the template standard; defer consumer propagation one cycle.**
-- Template keeps `build` = wireit (incremental caching keyed on src/config inputs) with `build:force` as the clean-build escape hatch — already coherent with `.wireit` cspell ignore.
-- No consumer uses wireit yet (0/8 spot-checked) → zero fleet breakage risk if deferred; deepmerge-ts stays direct-rollup until the template path soaks.
+- Template keeps `build` = wireit (incremental caching keyed on src/config inputs) with `build:force` as the clean-build escape hatch — already coherent with `.wireit` cspell ignore and `tsdown`-based build.
+- No consumer uses wireit yet (0/8 spot-checked) → zero fleet breakage risk if deferred; deepmerge-ts stays `tsdown`-based until the template path soaks.
 - Revisit after Chunk B/C validation; propagation then lands together with the `.wireit` cspell ignore row above.
 
 ## 2. attw: inside lint chain vs separate
