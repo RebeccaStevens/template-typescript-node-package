@@ -3,15 +3,11 @@
   "project": ["src/**/*.ts!"],
   "ignoreDependencies": [
     "@eslint/compat",
-    "@sebbo2002/semantic-release-jsr",
-    "@semantic-release/changelog",
-    "@semantic-release/git",
-    "@semantic-release/github",
-    "@semantic-release/npm",
-    "@semantic-release/release-notes-generator",
     "semantic-release",
     "semantic-release-publint",
   ],
+  "ignoreBinaries": [
+    "semantic-release",
+  ],
   "exclude": ["exports", "nsExports", "types", "nsTypes"],
-  "ignoreFiles": ["coverage/**"],
 }
