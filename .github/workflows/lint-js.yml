@@ -9,6 +9,9 @@ concurrency:
   group: ${{ github.workflow }}-lint-js-${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+
 jobs:
   lint_js:
     runs-on: ubuntu-latest
