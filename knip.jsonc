@@ -1,6 +1,13 @@
 {
   "$schema": "node_modules/knip/schema-jsonc.json",
   "project": ["src/**/*.ts!"],
-  "ignoreDependencies": ["@eslint/compat"],
+  "ignoreDependencies": [
+    "@eslint/compat",
+    "semantic-release",
+    "semantic-release-publint",
+  ],
+  "ignoreBinaries": [
+    "semantic-release",
+  ],
   "exclude": ["exports", "nsExports", "types", "nsTypes"],
 }

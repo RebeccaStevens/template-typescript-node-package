@@ -10,7 +10,7 @@ export default rsEslint({
   },
   formatters: true,
   functional: "recommended",
-  jsonc: true,
+  json: true,
   markdown: true,
   stylistic: true,
   yaml: true,

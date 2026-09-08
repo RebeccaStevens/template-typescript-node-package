@@ -74,5 +74,14 @@
       "semanticCommitScope": "dev-deps",
       "semanticCommitType": "ci"
     }
+  ],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "datasourceTemplate": "npm",
+      "versioningTemplate": "npm",
+      "managerFilePatterns": ["(^|/)package\\.json$"],
+      "matchStrings": ["--package (?<depName>@?[a-z0-9-]+(?:/[a-z0-9-]+)*)@(?<currentValue>[0-9]+\\.[0-9]+\\.[0-9]+)"]
+    }
   ]
 }
