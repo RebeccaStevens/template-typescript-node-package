@@ -15,10 +15,6 @@
     {
       "type": "ko-fi",
       "url": "https://ko-fi.com/rebeccastevens"
-    },
-    {
-      "type": "tidelift",
-      "url": "https://tidelift.com/funding/github/npm/package_name"
     }
   ],
   "license": "BSD-3-Clause",
@@ -29,12 +25,15 @@
   "sideEffects": false,
   "type": "module",
   "exports": {
-    "types": {
-      "import": "./dist/index.d.ts",
-      "require": "./dist/index.d.cts"
+    ".": {
+      "types": {
+        "import": "./dist/index.d.ts",
+        "require": "./dist/index.d.cts"
+      },
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
     },
-    "import": "./dist/index.js",
-    "require": "./dist/index.cjs"
+    "./package.json": "./package.json"
   },
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -110,7 +109,8 @@
         "rollup.config.ts",
         "tsconfig.json",
         "src/tsconfig.json",
-        "src/tsconfig.build.json"
+        "src/tsconfig.build.json",
+        "package.json"
       ],
       "output": [
         "dist/**"
@@ -118,14 +118,14 @@
     }
   },
   "devDependencies": {
-    "@arethetypeswrong/cli": "^0.18.5",
+    "@arethetypeswrong/cli": "0.18.5",
     "@commitlint/cli": "21.2.2",
     "@commitlint/config-conventional": "21.2.2",
     "@cspell/dict-cryptocurrencies": "5.0.5",
     "@eslint-community/eslint-plugin-eslint-comments": "4.7.2",
     "@eslint/compat": "2.1.0",
     "@eslint/markdown": "8.0.3",
-    "@rebeccastevens/eslint-config": "3.9.7",
+    "@rebeccastevens/eslint-config": "4.0.2",
     "@rollup/plugin-typescript": "12.3.0",
     "@stylistic/eslint-plugin": "5.10.0",
     "@types/node": "24.1.0",
@@ -142,19 +142,24 @@
     "eslint-formatting-reporter": "0.0.0",
     "eslint-import-resolver-typescript": "4.4.5",
     "eslint-merge-processors": "2.0.0",
+    "eslint-plugin-command": "4.0.0",
+    "eslint-plugin-erasable-syntax-only": "0.7.1",
     "eslint-plugin-format": "2.0.1",
     "eslint-plugin-functional": "10.0.0",
     "eslint-plugin-import-x": "4.17.1",
-    "eslint-plugin-jsdoc": "63.3.2",
+    "eslint-plugin-jsdoc": "64.2.1",
     "eslint-plugin-jsonc": "3.4.1",
     "eslint-plugin-n": "18.3.0",
     "eslint-plugin-no-only-tests": "3.4.0",
     "eslint-plugin-optimize-regex": "1.2.1",
+    "eslint-plugin-pnpm": "1.8.0",
     "eslint-plugin-prettier": "5.5.6",
     "eslint-plugin-promise": "7.3.0",
     "eslint-plugin-regexp": "3.2.0",
+    "eslint-plugin-security": "4.0.1",
     "eslint-plugin-sonarjs": "4.2.0",
-    "eslint-plugin-unicorn": "64.0.0",
+    "eslint-plugin-unicorn": "73.0.0",
+    "eslint-plugin-unused-imports": "4.4.1",
     "eslint-plugin-yml": "3.8.1",
     "husky": "9.1.7",
     "jsonc-eslint-parser": "3.3.0",
@@ -174,7 +179,7 @@
     "wireit": "0.14.13",
     "yaml-eslint-parser": "2.1.0"
   },
-  "packageManager": "pnpm@11.18.0",
+  "packageManager": "pnpm@11.21.0",
   "engines": {
     "node": ">=24.0.0"
   }
