@@ -36,6 +36,10 @@ jobs:
     uses: ./.github/workflows/typecheck.yml
 
   release:
+    # Auto-release toggle: set the AUTO_RELEASE_ENABLED repository variable to
+    # 'true' to enable automatic releases. Defaults to false when unset.
+    # See README.md for details.
+    if: ${{ vars.AUTO_RELEASE_ENABLED == 'true' }}
     needs:
       - lint_js
       - lint_knip

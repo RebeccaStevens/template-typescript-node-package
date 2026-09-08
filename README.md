@@ -11,7 +11,7 @@
 [![CI](https://github.com/RebeccaStevens/template-typescript-node-package/actions/workflows/release.yml/badge.svg)](https://github.com/RebeccaStevens/template-typescript-node-package/actions/workflows/release.yml)
 [![Coverage Status](https://codecov.io/gh/RebeccaStevens/template-typescript-node-package/branch/main/graph/badge.svg)](https://codecov.io/gh/RebeccaStevens/template-typescript-node-package)\
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
-[![GitHub Discussions](https://img.shields.io/github/discussions/RebeccaStevens/template-typescript-node-package?style=flat-square)](https://github.com/RebeccaStevens/template-typescript-node-package/discussions)
+[![GitHub Discussions](https://github.com/RebeccaStevens/template-typescript-node-package/discussions?style=flat-square)](https://github.com/RebeccaStevens/template-typescript-node-package/discussions)
 [![BSD 3 Clause license](https://img.shields.io/github/license/RebeccaStevens/template-typescript-node-package.svg?style=flat-square)](https://opensource.org/licenses/BSD-3-Clause)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=flat-square)](https://commitizen.github.io/cz-cli/)
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg?style=flat-square)](https://github.com/semantic-release/semantic-release)
@@ -110,3 +110,19 @@ When you are ready to publish your package:
 3. If your repository is private, add a `CODECOV_TOKEN` repository secret for the coverage step to succeed.
 
 <!-- template-publishing-end -->
+
+## Release Workflow Configuration
+
+### Auto-Release Toggle
+
+To control automatic releases, set the `AUTO_RELEASE_ENABLED` repository variable to `true` in GitHub repository settings. It defaults to `false`.
+
+- `true`: Release automatically on every push to `main`
+- `false` (default): Skip the release job while still running all other CI checks
+
+### Notes
+
+- The variable defaults to `false` — set it to `true` to enable auto-releases
+- Setting it to `false` prevents accidental releases while keeping all other CI checks running
+- The `semantic-pr.yml` workflow continues to validate PRs regardless of this setting
+- Template sync (`template-sync.yml`) remains unaffected
