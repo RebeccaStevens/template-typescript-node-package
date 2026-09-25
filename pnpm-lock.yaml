@@ -30,8 +30,8 @@ importers:
         specifier: 8.0.3
         version: 8.0.3(supports-color@7.2.0)
       '@rebeccastevens/eslint-config':
-        specifier: 3.9.7
-        version: 3.9.7(42e9d009510549f015ae407b4d5398a5)
+        specifier: 4.0.3
+        version: 4.0.3(42e9d009510549f015ae407b4d5398a5)
       '@rollup/plugin-typescript':
         specifier: 12.3.0
         version: 12.3.0(rollup@4.62.4)(tslib@2.8.1)(typescript@6.0.3)
@@ -179,8 +179,8 @@ packages:
   '@andrewbranch/untar.js@1.0.4':
     resolution: {integrity: sha512-pVXSwPsLuw8IGLo2Di0EaOfsk+ntVvpkk942J/sHYIkwvtKUakEcPh7HBgZ6tuimgzKSEHgCvO4XgQ05DEbwDw==}
 
-  '@antfu/install-pkg@1.1.0':
-    resolution: {integrity: sha512-MGQsmw10ZyI+EJo45CdSER4zEb+p31LpDAFp2Z3gkSd1yqVZGi0Ebx++YTEMonJy4oChEMLsxZ64j8FH6sSqtQ==}
+  '@antfu/install-pkg@2.1.0':
+    resolution: {integrity: sha512-sdg9NxU3zR4Mnawfbc/x6GB5Wf17WYud5qOuEuxXjaKpYpMkISSJEjItGebXJ2bQ4DIcly4NYH23mtkGJjvKUw==}
 
   '@arethetypeswrong/cli@0.18.5':
     resolution: {integrity: sha512-gM+8vRsQOD/Uc7EnBedUhkG5OCsDWE4uoak5QvomGpMpaky0Eh41p04nIMgrWb8EOmqZUJGc6zz9hsP6E56R7g==}
@@ -1071,13 +1071,14 @@ packages:
     resolution: {integrity: sha512-3uVNyGcVplhPZSLVyeIpL7+cIRn1YCSNHLG/rUIlBQMVH8YuN9++YF+5+UDIIO9RW98dujiUoTltO7RDB5bFJA==}
     engines: {node: '>=18'}
 
-  '@rebeccastevens/eslint-config@3.9.7':
-    resolution: {integrity: sha512-+PzrXQAvqrHGXRXdxy5WEmg4SDACtbZzXLjkcNWc5wU5D7B4dZ/K5SXFKvr3iEPGVmtQnMTcxKniXgEANBY1rg==}
-    engines: {node: '>=20.0.0'}
+  '@rebeccastevens/eslint-config@4.0.3':
+    resolution: {integrity: sha512-D3fU4zPAXM9Cdg69HVJqQrzDcufEjPdxQ1l69uB0GSaAjgdZ5mSWtgNgmFn1VE3ENTlu25C7OuCC6Uh7RPRIQA==}
+    engines: {node: '>=24.0.0'}
     peerDependencies:
       '@eslint-community/eslint-plugin-eslint-comments': '*'
       '@eslint-react/eslint-plugin': '*'
       '@eslint/markdown': '*'
+      '@intlify/eslint-plugin-vue-i18n': '*'
       '@stylistic/eslint-plugin': '*'
       '@typescript-eslint/eslint-plugin': '*'
       '@typescript-eslint/parser': '*'
@@ -1091,6 +1092,8 @@ packages:
       eslint-import-resolver-typescript: '*'
       eslint-merge-processors: '*'
       eslint-plugin-better-tailwindcss: '*'
+      eslint-plugin-command: '*'
+      eslint-plugin-erasable-syntax-only: '*'
       eslint-plugin-format: '*'
       eslint-plugin-functional: '*'
       eslint-plugin-i18next: '*'
@@ -1101,14 +1104,18 @@ packages:
       eslint-plugin-n: '*'
       eslint-plugin-no-only-tests: '*'
       eslint-plugin-optimize-regex: '*'
+      eslint-plugin-perfectionist: '*'
+      eslint-plugin-pnpm: '*'
       eslint-plugin-prettier: '*'
       eslint-plugin-promise: '*'
       eslint-plugin-react-hooks: '*'
       eslint-plugin-react-refresh: '*'
       eslint-plugin-regexp: '*'
+      eslint-plugin-security: '*'
       eslint-plugin-sonarjs: '*'
       eslint-plugin-toml: '*'
       eslint-plugin-unicorn: '*'
+      eslint-plugin-unused-imports: '*'
       eslint-plugin-vue: '*'
       eslint-plugin-yml: '*'
       eslint-processor-vue-blocks: '*'
@@ -1124,6 +1131,8 @@ packages:
       '@eslint-react/eslint-plugin':
         optional: true
       '@eslint/markdown':
+        optional: true
+      '@intlify/eslint-plugin-vue-i18n':
         optional: true
       '@stylistic/eslint-plugin':
         optional: true
@@ -1149,6 +1158,10 @@ packages:
         optional: true
       eslint-plugin-better-tailwindcss:
         optional: true
+      eslint-plugin-command:
+        optional: true
+      eslint-plugin-erasable-syntax-only:
+        optional: true
       eslint-plugin-format:
         optional: true
       eslint-plugin-functional:
@@ -1169,6 +1182,10 @@ packages:
         optional: true
       eslint-plugin-optimize-regex:
         optional: true
+      eslint-plugin-perfectionist:
+        optional: true
+      eslint-plugin-pnpm:
+        optional: true
       eslint-plugin-prettier:
         optional: true
       eslint-plugin-promise:
@@ -1179,11 +1196,15 @@ packages:
         optional: true
       eslint-plugin-regexp:
         optional: true
+      eslint-plugin-security:
+        optional: true
       eslint-plugin-sonarjs:
         optional: true
       eslint-plugin-toml:
         optional: true
       eslint-plugin-unicorn:
+        optional: true
+      eslint-plugin-unused-imports:
         optional: true
       eslint-plugin-vue:
         optional: true
@@ -3760,8 +3781,8 @@ packages:
   tinybench@2.9.0:
     resolution: {integrity: sha512-0+DUvqWMValLmha6lr4kD8iAMK1HzV0/aKnCtWb9v9641TnP/MFb7Pc2bxoxQjTXAErryXVgUOfv2YqNllqGeg==}
 
-  tinyexec@1.3.0:
-    resolution: {integrity: sha512-QKAl9m8gWWGHV8jZcPeym6j+XULi6tOf1mT83WYJ4Lk2ytW/uwAWkrP0uFsdoYMdueVJ0qs26wZ+23xeB4ibNQ==}
+  tinyexec@1.3.1:
+    resolution: {integrity: sha512-GCvB3aoys96IuDFBMcTB46JOR6mdMtAToqwiW8JlWhsoh1mhHi/xn9ss/Dg7N555GiJyEt2qzoG/NHCwM6h1EA==}
     engines: {node: '>=18'}
 
   tinyglobby@0.2.17:
@@ -4075,10 +4096,10 @@ snapshots:
 
   '@andrewbranch/untar.js@1.0.4': {}
 
-  '@antfu/install-pkg@1.1.0':
+  '@antfu/install-pkg@2.1.0':
     dependencies:
       package-manager-detector: 1.8.0
-      tinyexec: 1.3.0
+      tinyexec: 1.3.1
 
   '@arethetypeswrong/cli@0.18.5':
     dependencies:
@@ -4147,7 +4168,7 @@ snapshots:
       '@commitlint/load': 21.2.2(@types/node@24.1.0)(typescript@6.0.3)
       '@commitlint/read': 21.2.1(conventional-commits-parser@7.1.2)
       '@commitlint/types': 21.2.0
-      tinyexec: 1.3.0
+      tinyexec: 1.3.1
       yargs: 18.1.0
     transitivePeerDependencies:
       - '@types/node'
@@ -4217,7 +4238,7 @@ snapshots:
       '@commitlint/top-level': 21.2.0
       '@commitlint/types': 21.2.0
       '@conventional-changelog/git-client': 3.1.2(conventional-commits-parser@7.1.2)
-      tinyexec: 1.3.0
+      tinyexec: 1.3.1
     transitivePeerDependencies:
       - conventional-commits-filter
       - conventional-commits-parser
@@ -4840,11 +4861,11 @@ snapshots:
 
   '@publint/pack@0.1.6':
     dependencies:
-      tinyexec: 1.3.0
+      tinyexec: 1.3.1
 
-  '@rebeccastevens/eslint-config@3.9.7(42e9d009510549f015ae407b4d5398a5)':
+  '@rebeccastevens/eslint-config@4.0.3(42e9d009510549f015ae407b4d5398a5)':
     dependencies:
-      '@antfu/install-pkg': 1.1.0
+      '@antfu/install-pkg': 2.1.0
       '@clack/prompts': 1.7.0
       eslint: 10.8.1(jiti@2.7.0)(supports-color@7.2.0)
       globals: 17.11.0
@@ -6630,7 +6651,7 @@ snapshots:
     dependencies:
       picomatch: 4.0.5
       string-argv: 0.3.2
-      tinyexec: 1.3.0
+      tinyexec: 1.3.1
     optionalDependencies:
       yaml: 2.9.0
 
@@ -7642,7 +7663,7 @@ snapshots:
 
   tinybench@2.9.0: {}
 
-  tinyexec@1.3.0: {}
+  tinyexec@1.3.1: {}
 
   tinyglobby@0.2.17:
     dependencies:
@@ -7798,7 +7819,7 @@ snapshots:
       picomatch: 4.0.5
       std-env: 4.2.0
       tinybench: 2.9.0
-      tinyexec: 1.3.0
+      tinyexec: 1.3.1
       tinyglobby: 0.2.17
       tinyrainbow: 3.1.1
       vite: 8.0.13(@types/node@24.1.0)(jiti@2.7.0)(yaml@2.9.0)
